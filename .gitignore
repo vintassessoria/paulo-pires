@@ -30,3 +30,7 @@ dist-ssr
 
 # TypeScript build info
 *.tsbuildinfo
+
+# Vídeos originais soltos na raiz (o do site fica em public/videos)
+/*.mp4
+/*.mov
