@@ -123,10 +123,9 @@ export default function Hero() {
       <div className="absolute inset-0 -z-10 bg-ink">
         <video
           ref={videoRef}
-          className="h-full w-full object-cover"
-          // Zoom + origem no canto superior-esquerdo empurra o canto
-          // inferior-direito (marca d'água) para fora da tela
-          style={{ objectPosition: 'center', transform: 'scale(1.2)', transformOrigin: '30% 22%' }}
+          // No mobile enquadra o Paulo (centro-direita do vídeo); no desktop
+          // centraliza e aplica o zoom que remove a marca d'água.
+          className="video-zoom-lg h-full w-full object-cover object-[60%_35%] lg:object-center"
           autoPlay
           muted
           loop
