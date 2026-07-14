@@ -1,0 +1,309 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    /* Nunca permitir deslize horizontal da página (corta conteúdo nas bordas) */
+    overflow-x: clip;
+  }
+
+  /* Lenis (rolagem suave) */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    color: #ECE6DA;
+    background-color: #0A0A0A;
+    overflow-x: hidden;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+  }
+
+  /* Fraunces é variável: o eixo óptico deixa as letras mais elegantes
+     em displays grandes e mais legíveis em tamanhos menores */
+  .font-display {
+    font-optical-sizing: auto;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Fundo: preto profundo com leve respiro quente no topo + vinheta */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(115% 85% at 50% -8%, #2A1210 0%, #1A100E 45%, #120C0B 100%);
+  }
+  /* Grão de filme vivo — tremula em passos discretos, como película */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    animation: grainShift 7s steps(10) infinite;
+  }
+
+  @keyframes kenburnsA {
+  0% {
+    transform: scale(1.05) translate(0%, 0%);
+  }
+  100% {
+    transform: scale(1.16) translate(-1.6%, -1.2%);
+  }
+}
+@keyframes kenburnsB {
+  0% {
+    transform: scale(1.16) translate(1.2%, -1%);
+  }
+  100% {
+    transform: scale(1.05) translate(0%, 0%);
+  }
+}
+
+@keyframes grainShift {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 160px 96px;
+    }
+  }
+
+  ::selection {
+    background-color: rgba(168, 66, 60, 0.36);
+    color: #fff;
+  }
+
+  /* Esconde o cursor nativo quando o personalizado está ativo */
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button,
+  body.has-custom-cursor [role='listbox'] {
+    cursor: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A0A0A;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2A2620;
+    border-radius: 999px;
+    border: 2px solid #0A0A0A;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #3A352B;
+  }
+}
+
+@layer components {
+  .container-pp {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  /* Acento dourado SÓLIDO (sem gradiente) */
+  .text-gold-grad {
+    color: #D6836A;
+    -webkit-text-fill-color: #D6836A;
+  }
+
+  /* Painéis — discretos, sem brilho exagerado */
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-strong,
+  .glass-deep {
+    background: rgba(15, 14, 12, 0.72);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.045);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  /* Cartão padrão — superfície sólida sóbria */
+  .card-dark {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.035) 0%, rgba(255, 255, 255, 0.012) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  /* Linha decorativa fina dourada */
+  .hairline-gold {
+    background: linear-gradient(90deg, transparent, rgba(168, 66, 60, 0.5), transparent);
+  }
+
+  /* Botão vinho sólido com brilho que varre no hover */
+  .btn-gold {
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3 font-heading text-sm font-semibold tracking-wide transition-colors duration-200;
+    background-color: #A8423C;
+    color: #F6EDE0;
+  }
+  .btn-gold:hover {
+    background-color: #BB4E45;
+  }
+  .btn-gold::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 45%;
+    transform: translateX(-140%) skewX(-18deg);
+    background: linear-gradient(90deg, transparent, rgba(255, 246, 230, 0.35), transparent);
+  }
+  .btn-gold:hover::after {
+    animation: btnSheen 0.85s ease forwards;
+  }
+
+  @keyframes btnSheen {
+    to {
+      transform: translateX(340%) skewX(-18deg);
+    }
+  }
+
+  /* Botão contorno */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border px-7 py-3 font-heading text-sm font-semibold tracking-wide transition-colors duration-200;
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ECE6DA;
+  }
+  .btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.45);
+    background-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .eyebrow {
+    @apply font-heading text-xs font-semibold uppercase tracking-widest2;
+    color: #D6836A;
+  }
+
+  /* Sombra de texto discreta (sobre foto) */
+  .text-shadow-warm {
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Brilho de cursor — bem sutil, branco frio */
+  .spotlight-glow {
+    background: radial-gradient(
+      var(--spot, 240px) circle at var(--mx, 50%) var(--my, 50%),
+      rgba(255, 255, 255, 0.05),
+      transparent 55%
+    );
+  }
+
+  /* Profundidade 3D — só em dispositivos com mouse (onde há inclinação).
+     Em telas de toque a profundidade é neutra: sem translateZ, os
+     elementos nunca "somem" por sair do plano de projeção. */
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .depth,
+  .depth-sm,
+  .depth-lg {
+    transform: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .depth {
+      transform: translateZ(45px);
+    }
+    .depth-sm {
+      transform: translateZ(24px);
+    }
+    .depth-lg {
+      transform: translateZ(70px);
+    }
+  }
+
+  /* Cursor personalizado */
+  .cursor-dot,
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    border-radius: 9999px;
+    will-change: transform;
+  }
+  .cursor-dot {
+    width: 7px;
+    height: 7px;
+    margin: -3.5px 0 0 -3.5px;
+    background: #ECEAE5;
+  }
+  .cursor-ring {
+    width: 34px;
+    height: 34px;
+    margin: -17px 0 0 -17px;
+    border: 1px solid rgba(168, 159, 146, 0.55);
+    transition: width 0.22s ease, height 0.22s ease, margin 0.22s ease,
+      background-color 0.22s ease, border-color 0.22s ease;
+  }
+  .cursor-ring.cursor-active {
+    width: 58px;
+    height: 58px;
+    margin: -29px 0 0 -29px;
+    background: rgba(168, 159, 146, 0.12);
+    border-color: rgba(168, 159, 146, 0.9);
+  }
+
+  /* Reflexo no "chão" (estilo coverflow) — só em telas grandes,
+     onde há espaço abaixo do elemento */
+  @media (min-width: 1024px) {
+    .reflect-below-lg {
+      -webkit-box-reflect: below 16px linear-gradient(transparent 78%, rgba(0, 0, 0, 0.22));
+    }
+  }
+
+  /* Ken Burns — zoom lento de documentário para o slideshow do hero */
+  .kenburns-a {
+    animation: kenburnsA 15s ease-out forwards;
+  }
+  .kenburns-b {
+    animation: kenburnsB 15s ease-out forwards;
+  }
+
+  .noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+}
+
+/* Nota: por decisão do artista, as animações do site rodam sempre,
+   mesmo com "reduzir animações" ativado no sistema do visitante. */

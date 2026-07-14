@@ -1,0 +1,32 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependencies
+node_modules
+dist
+dist-ssr
+*.local
+
+# Imagens originais/soltas na raiz (as versões otimizadas usadas pelo
+# site ficam em public/images). Mantêm o repositório leve para o deploy.
+/*.jpg
+/*.jpeg
+/*.png
+/*.webp
+/*.mjs
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# TypeScript build info
+*.tsbuildinfo

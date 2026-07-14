@@ -1,0 +1,13 @@
+{
+  "name": "Paulo Pires",
+  "short_name": "Paulo Pires",
+  "description": "Site oficial de Paulo Pires, cantor e compositor goiano.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0E0D0C",
+  "theme_color": "#0E0D0C",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" }
+  ]
+}
