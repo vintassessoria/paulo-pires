@@ -53,7 +53,7 @@ export default function Stats() {
                   </div>
                   <Counter
                     value={item.value}
-                    className="depth mt-5 block font-display text-[1.9rem] font-semibold leading-[1.02] tracking-[-0.01em] text-gold-grad [font-variant-numeric:tabular-nums] xl:text-[2.1rem]"
+                    className="mt-5 block font-display text-[1.9rem] font-semibold leading-[1.02] tracking-[-0.01em] text-gold-grad [font-variant-numeric:tabular-nums] xl:text-[2.1rem]"
                   />
                   <p className="mt-auto pt-4 text-sm text-muted">{item.sub}</p>
                 </div>
