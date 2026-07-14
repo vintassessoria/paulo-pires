@@ -124,7 +124,9 @@ export default function Hero() {
         <video
           ref={videoRef}
           className="h-full w-full object-cover"
-          style={{ objectPosition: 'right center' }}
+          // Zoom + origem no canto superior-esquerdo empurra o canto
+          // inferior-direito (marca d'água) para fora da tela
+          style={{ objectPosition: 'center', transform: 'scale(1.2)', transformOrigin: '30% 22%' }}
           autoPlay
           muted
           loop
@@ -168,7 +170,7 @@ export default function Hero() {
       <div className="relative z-10 flex h-full items-end pb-12 sm:items-center sm:pb-0">
         <motion.div
           style={{ x: textX, y: textY }}
-          className="container-pp max-w-2xl"
+          className="w-full max-w-lg pl-5 pr-5 sm:pl-10 lg:max-w-[30rem] lg:pl-20 xl:pl-28"
         >
           <motion.div
             initial={{ opacity: 0, y: 12 }}
