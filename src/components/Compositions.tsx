@@ -64,6 +64,10 @@ export default function Compositions() {
   const tracksRef = useRef<Track[]>([])
   const mutedRef = useRef(muted)
   const activeRef = useRef(active)
+  // "O usuário quer ouvir": decidido no próprio toque. É um ref, e não estado,
+  // porque `isPlaying` chega atrasado (depende da promessa do play() resolver)
+  // e não serve para decidir, no gesto, se a próxima faixa deve tocar.
+  const wantsPlayRef = useRef(false)
   useEffect(() => {
     tracksRef.current = tracks
   }, [tracks])
@@ -108,21 +112,31 @@ export default function Compositions() {
         // Avisa os demais players do site (ex.: trilha sonora) para pausarem
         window.dispatchEvent(new CustomEvent('pp:audio', { detail: 'compositions' }))
       })
-      .catch(() => setIsPlaying(false))
+      .catch((err: unknown) => {
+        // Trocar de faixa cancela o play() da faixa anterior, que rejeita com
+        // AbortError. Isso é esperado e NÃO quer dizer que a música parou —
+        // tratá-lo como falha derrubava `isPlaying` e fazia o toque seguinte
+        // ser ignorado (dava "uma música sim, uma não" em rede lenta).
+        if ((err as { name?: string })?.name === 'AbortError') return
+        wantsPlayRef.current = false
+        setIsPlaying(false)
+      })
   }
 
-  /** Muda o foco e, se já estiver tocando, emenda o áudio no mesmo gesto. */
+  /** Muda o foco e, se o usuário estiver ouvindo, emenda a faixa no gesto. */
   const goTo = (i: number) => {
     setActive(i)
-    if (isPlaying) playIndex(i)
+    if (wantsPlayRef.current) playIndex(i)
   }
 
   const togglePlay = () => {
     const a = getAudio()
-    if (isPlaying) {
+    if (wantsPlayRef.current) {
+      wantsPlayRef.current = false
       a.pause()
       setIsPlaying(false)
     } else {
+      wantsPlayRef.current = true
       playIndex(active)
     }
   }
@@ -142,6 +156,7 @@ export default function Compositions() {
   useEffect(() => {
     const onOther = (e: Event) => {
       if ((e as CustomEvent).detail !== 'compositions' && audioRef.current) {
+        wantsPlayRef.current = false
         audioRef.current.pause()
         setIsPlaying(false)
       }
@@ -157,7 +172,7 @@ export default function Compositions() {
     const onEnded = () => {
       const nxt = (activeRef.current + 1) % len
       setActive(nxt)
-      playIndex(nxt)
+      if (wantsPlayRef.current) playIndex(nxt)
     }
     a.addEventListener('ended', onEnded)
     return () => {
@@ -188,6 +203,10 @@ export default function Compositions() {
           className="mt-16"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
+          // No toque não existe enter/leave: sem isto o carrossel seguiria
+          // girando sozinho e trocaria a faixa debaixo do dedo do visitante.
+          // Assim que ele assume o controle, o giro automático não volta.
+          onPointerDown={() => setPaused(true)}
         >
           <Coverflow items={covers} active={active} onActiveChange={goTo} />
           <div className="mt-14">
