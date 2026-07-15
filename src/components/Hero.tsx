@@ -103,7 +103,7 @@ function Trending({ index, className = '' }: { index: number; className?: string
 }
 
 /* ------------------------------------------------------------------ */
-/* DESKTOP — pôster: nome gigante atrás, figura recortada por cima      */
+/* Pôster: nome gigante atrás, figura recortada por cima                */
 /* ------------------------------------------------------------------ */
 function HeroPoster({ hi }: { hi: number }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -142,8 +142,8 @@ function HeroPoster({ hi }: { hi: number }) {
       />
       <EmberCanvas className="pointer-events-none absolute inset-0 z-0" />
 
-      {/* Redes verticais */}
-      <div className="absolute left-6 top-1/2 z-30 flex -translate-y-1/2 flex-col items-center gap-5">
+      {/* Redes verticais — só onde há margem lateral sobrando */}
+      <div className="absolute left-6 top-1/2 z-30 hidden -translate-y-1/2 flex-col items-center gap-5 lg:flex">
         <span className="h-14 w-px bg-white/15" />
         {socialItems.map(({ name, Icon, key }) => (
           <a
@@ -161,16 +161,16 @@ function HeroPoster({ hi }: { hi: number }) {
       </div>
 
       {/* Selo + nome gigante numa linha (atrás) */}
-      <div className="absolute inset-x-0 top-[15%] z-[1]">
+      <div className="absolute inset-x-0 top-[13%] z-[1] sm:top-[15%]">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
           className="mb-4 flex items-center justify-center gap-3"
         >
-          <span className="h-px w-12 bg-gold/70" />
+          <span className="h-px w-8 bg-gold/70 sm:w-12" />
           <span className="eyebrow">Cantor &amp; Compositor · Goiás</span>
-          <span className="h-px w-12 bg-gold/70" />
+          <span className="h-px w-8 bg-gold/70 sm:w-12" />
         </motion.div>
         <motion.div
           aria-hidden
@@ -196,7 +196,7 @@ function HeroPoster({ hi }: { hi: number }) {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute inset-x-0 bottom-0 z-[2] flex h-[80vh] items-end justify-center"
+        className="absolute inset-x-0 bottom-0 z-[2] flex h-[82vh] items-end justify-center sm:h-[80vh]"
       >
         <motion.div className="relative flex h-full items-end" style={{ x: figX, y: figY }}>
           <div
@@ -239,12 +239,12 @@ function HeroPoster({ hi }: { hi: number }) {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[34vh] bg-gradient-to-t from-ink via-ink/55 to-transparent" />
 
       {/* Base: subtítulo + CTAs centrados */}
-      <div className="absolute inset-x-0 bottom-0 z-[4] flex flex-col items-center px-5 pb-10 text-center">
+      <div className="absolute inset-x-0 bottom-0 z-[4] flex flex-col items-center px-5 pb-8 text-center sm:pb-10">
         <motion.p
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.95 }}
-          className="max-w-xl text-pretty text-base leading-relaxed text-white/80 text-shadow-warm"
+          className="max-w-xl text-pretty text-sm leading-relaxed text-white/80 text-shadow-warm sm:text-base"
         >
           Une o sertanejo, o pop e o romantismo em canções que conectam o Brasil — e assina
           alguns dos maiores sucessos da música nacional.
@@ -253,7 +253,7 @@ function HeroPoster({ hi }: { hi: number }) {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.1 }}
-          className="mt-6 flex flex-row items-center gap-3"
+          className="mt-6 flex flex-col items-center gap-3 sm:flex-row"
         >
           <Magnetic strength={0.2}>
             <a href="#musicas" className="btn-gold">
@@ -268,14 +268,17 @@ function HeroPoster({ hi }: { hi: number }) {
             </a>
           </Magnetic>
         </motion.div>
+
+        {/* Redes: no celular vêm para a base, já que a coluna lateral some */}
+        <SocialRow className="mt-6 lg:hidden" />
       </div>
 
-      {/* "Em alta" — canto inferior esquerdo */}
+      {/* "Em alta" — canto inferior esquerdo, onde há espaço livre */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1.35 }}
-        className="absolute bottom-8 left-20 z-[5]"
+        className="absolute bottom-8 left-6 z-[5] hidden lg:left-20 lg:block"
       >
         <Trending index={hi} />
       </motion.div>
@@ -283,137 +286,14 @@ function HeroPoster({ hi }: { hi: number }) {
   )
 }
 
-/* ------------------------------------------------------------------ */
-/* MOBILE — vídeo em tela cheia com o texto na base                    */
-/* ------------------------------------------------------------------ */
-function HeroVideo({ hi }: { hi: number }) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    const tryPlay = () => videoRef.current?.play().catch(() => {})
-    tryPlay()
-    const onGesture = () => {
-      tryPlay()
-      window.removeEventListener('pointerdown', onGesture)
-      window.removeEventListener('scroll', onGesture)
-    }
-    window.addEventListener('pointerdown', onGesture, { once: true })
-    window.addEventListener('scroll', onGesture, { once: true, passive: true })
-    return () => {
-      window.removeEventListener('pointerdown', onGesture)
-      window.removeEventListener('scroll', onGesture)
-    }
-  }, [])
-
-  return (
-    <div className="absolute inset-0">
-      {/* Vídeo de fundo (enquadrado no Paulo, que fica no centro-direita) */}
-      <div className="absolute inset-0 -z-10 bg-ink">
-        <video
-          ref={videoRef}
-          className="h-full w-full object-cover object-[60%_35%]"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          aria-hidden="true"
-        >
-          <source src="/videos/hero.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/25" />
-        <div
-          className="absolute inset-0 mix-blend-soft-light"
-          style={{ background: 'linear-gradient(120deg, rgba(120,48,40,0.5), transparent 55%)' }}
-        />
-        <div className="absolute inset-0 bg-[radial-gradient(120%_90%_at_50%_45%,transparent_50%,rgba(10,6,5,0.55)_100%)]" />
-      </div>
-
-      {/* Conteúdo na base */}
-      <div className="relative z-10 flex h-full items-end">
-        <div className="w-full px-5 pb-10">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mb-4 flex items-center gap-3"
-          >
-            <span className="h-px w-10 bg-gold" />
-            <span className="eyebrow">Cantor &amp; Compositor · Goiás</span>
-          </motion.div>
-
-          <div aria-hidden className="select-none">
-            <LetterReveal
-              text="PAULO"
-              delay={0.3}
-              className="block font-display text-[clamp(3.4rem,15vw,5rem)] font-semibold leading-[0.85] tracking-[-0.02em] text-cream drop-shadow-[0_8px_30px_rgba(0,0,0,0.6)]"
-            />
-            <LetterReveal
-              text="PIRES"
-              delay={0.5}
-              className="block font-display text-[clamp(3.4rem,15vw,5rem)] font-semibold italic leading-[0.85] tracking-[0.015em] text-gold-grad drop-shadow-[0_8px_30px_rgba(0,0,0,0.6)]"
-            />
-          </div>
-
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.9 }}
-            className="mt-4 max-w-md text-pretty text-sm leading-relaxed text-white/80 text-shadow-warm"
-          >
-            Une o sertanejo, o pop e o romantismo em canções que conectam o Brasil — e assina
-            alguns dos maiores sucessos da música nacional.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.05 }}
-            className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
-          >
-            <a href="#musicas" className="btn-gold">
-              <Play className="h-4 w-4 fill-current" />
-              Ouça agora
-            </a>
-            <a href={whatsappLink} target="_blank" rel="noreferrer" className="btn-ghost">
-              <Calendar className="h-4 w-4" />
-              Contratar show
-            </a>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 1.2 }}
-          >
-            <Trending index={hi} className="mt-6 border-t border-white/10 pt-3" />
-          </motion.div>
-
-          <SocialRow className="mt-5" />
-        </div>
-      </div>
-    </div>
-  )
-}
-
 /**
- * Hero responsivo:
- *  - Desktop (lg+): pôster com o nome gigante atrás e a figura recortada.
- *  - Mobile/tablet: vídeo em tela cheia com o texto na base.
- * Só uma versão é montada — o vídeo nem é baixado no desktop.
+ * Hero — o mesmo pôster no computador e no celular: nome gigante atrás,
+ * figura recortada por cima. O enquadramento no celular sobe a figura para
+ * 82vh e centraliza pela cabeça, não pela massa do corpo (ver comentários
+ * na figura).
  */
 export default function Hero() {
-  const [isDesktop, setIsDesktop] = useState(
-    () => typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches,
-  )
   const [hi, setHi] = useState(0)
-
-  useEffect(() => {
-    const mq = window.matchMedia('(min-width: 1024px)')
-    const onChange = () => setIsDesktop(mq.matches)
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
-  }, [])
 
   useEffect(() => {
     const id = setInterval(() => setHi((h) => (h + 1) % achievements.length), 3600)
@@ -421,9 +301,9 @@ export default function Hero() {
   }, [])
 
   return (
-    <section id="inicio" className="relative isolate h-[100svh] min-h-[620px] overflow-hidden">
+    <section id="inicio" className="relative isolate h-[100svh] min-h-[640px] overflow-hidden">
       <h1 className="sr-only">Paulo Pires — Cantor e Compositor</h1>
-      {isDesktop ? <HeroPoster hi={hi} /> : <HeroVideo hi={hi} />}
+      <HeroPoster hi={hi} />
     </section>
   )
 }
