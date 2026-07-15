@@ -69,24 +69,7 @@
     animation: grainShift 7s steps(10) infinite;
   }
 
-  @keyframes kenburnsA {
-  0% {
-    transform: scale(1.05) translate(0%, 0%);
-  }
-  100% {
-    transform: scale(1.16) translate(-1.6%, -1.2%);
-  }
-}
-@keyframes kenburnsB {
-  0% {
-    transform: scale(1.16) translate(1.2%, -1%);
-  }
-  100% {
-    transform: scale(1.05) translate(0%, 0%);
-  }
-}
-
-@keyframes grainShift {
+  @keyframes grainShift {
     0% {
       background-position: 0 0;
     }
@@ -290,27 +273,6 @@
     .reflect-below-lg {
       -webkit-box-reflect: below 16px linear-gradient(transparent 78%, rgba(0, 0, 0, 0.22));
     }
-  }
-
-  /* Zoom do vídeo do hero só no desktop (empurra a marca d'água do canto
-     inferior-direito para fora). No mobile o enquadramento é feito por
-     object-position, sem zoom, para não cortar o Paulo. */
-  .video-zoom-lg {
-    transform: none;
-  }
-  @media (min-width: 1024px) {
-    .video-zoom-lg {
-      transform: scale(1.2);
-      transform-origin: 30% 22%;
-    }
-  }
-
-  /* Ken Burns — zoom lento de documentário para o slideshow do hero */
-  .kenburns-a {
-    animation: kenburnsA 15s ease-out forwards;
-  }
-  .kenburns-b {
-    animation: kenburnsB 15s ease-out forwards;
   }
 
   .noise-overlay {
