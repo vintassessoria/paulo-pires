@@ -120,7 +120,7 @@ export default function Booking() {
             <div className="reflect-below-lg relative h-full overflow-hidden rounded-[1.5rem] border border-white/10 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]">
               <ArtistImage
                 src="/images/paulo-booking.jpg"
-                alt="Paulo Pires cantando ao vivo"
+                alt="Paulo Pires — retrato"
                 label="Retrato"
                 imgClassName="object-top"
                 className="h-full w-full"

@@ -11,10 +11,9 @@
 /* ---------- Contato comercial ---------- */
 export const contact = {
   // Número exibido na tela (formatação livre)
-  whatsappDisplay: '(61) 8348-6282',
+  whatsappDisplay: '(61) 98348-6282',
   // Apenas dígitos, com código do país (55) + DDD + número, para o link wa.me
-  // ⚠️ Se o WhatsApp não abrir, confira se falta o "9" inicial do celular.
-  whatsappDigits: '556183486282',
+  whatsappDigits: '5561983486282',
   whatsappMessage:
     'Olá! Gostaria de informações para contratar o show do Paulo Pires.',
   email: 'paulipirescantor@gmail.com',
@@ -182,13 +181,6 @@ export const eventTypes = [
 /* ---------- Galeria de fotos ----------
  * Para trocar/adicionar fotos, coloque os arquivos em /public/images
  * e ajuste os caminhos abaixo. */
-export const galleryPhotos = [
-  { src: '/images/gallery-1.jpg', alt: 'Paulo Pires — retrato' },
-  { src: '/images/gallery-2.jpg', alt: 'Paulo Pires — retrato' },
-  { src: '/images/gallery-3.jpg', alt: 'Paulo Pires — retrato' },
-  { src: '/images/gallery-4.jpg', alt: 'Paulo Pires — retrato' },
-]
-
 /* ---------- Navegação ---------- */
 export const navLinks = [
   { label: 'Início', href: '#inicio' },
