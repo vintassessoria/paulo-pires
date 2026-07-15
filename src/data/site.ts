@@ -84,13 +84,47 @@ export const timeline = [
 /* ---------- Composições (hits assinados por Paulo Pires) ---------- */
 // `cover` é opcional: ao colocar a imagem no caminho indicado, ela aparece
 // automaticamente no coverflow (enquanto não existir, mostra o placeholder).
+/* `cover` é a capa oficial servida pela CDN da Apple — fica aqui fixa para a
+ * foto aparecer mesmo se a busca no iTunes falhar (celular sem sinal, etc.).
+ * O player ainda busca a prévia de 30s em tempo real; se a capa de algum
+ * lançamento mudar, basta atualizar a URL abaixo. */
 export const compositions: { song: string; artist: string; cover?: string }[] = [
-  { song: 'Ciumeira', artist: 'Marília Mendonça', cover: '/images/covers/ciumeira.jpg' },
-  { song: 'Homem de Família', artist: 'Gusttavo Lima', cover: '/images/covers/homem-de-familia.jpg' },
-  { song: 'Não Deixo Não', artist: 'Mano Walter', cover: '/images/covers/nao-deixo-nao.jpg' },
-  { song: 'Sorte Que Cê Beija Bem', artist: 'Maiara & Maraisa', cover: '/images/covers/sorte-que-ce-beija-bem.jpg' },
-  { song: 'Amor Atual', artist: 'Henrique & Juliano', cover: '/images/covers/amor-atual.jpg' },
-  { song: 'Rapariga Não', artist: 'João Neto & Frederico, Simone & Simaria', cover: '/images/covers/rapariga-nao.jpg' },
+  {
+    song: 'Ciumeira',
+    artist: 'Marília Mendonça',
+    cover:
+      'https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/0e/3b/e6/0e3be64d-5995-09bb-9532-6f23ac696eef/7891430304270.jpg/600x600bb.jpg',
+  },
+  {
+    song: 'Homem de Família',
+    artist: 'Gusttavo Lima',
+    cover:
+      'https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/f5/fe/bf/f5febf1c-d6cb-ec8b-dadf-e42be13cd64e/196589312891.jpg/600x600bb.jpg',
+  },
+  {
+    song: 'Não Deixo Não',
+    artist: 'Mano Walter',
+    cover:
+      'https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f1/16/e7/f116e74a-0840-ec6f-b625-21839c90e234/7891430345778.jpg/600x600bb.jpg',
+  },
+  {
+    song: 'Sorte Que Cê Beija Bem',
+    artist: 'Maiara & Maraisa',
+    cover:
+      'https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/d1/30/5e/d1305efd-80d1-ff59-24ad-5f7e4271f25c/7891430143374.jpg/600x600bb.jpg',
+  },
+  {
+    song: 'Amor Atual',
+    artist: 'Henrique & Juliano',
+    cover:
+      'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/57/d2/07/57d20750-4ea6-1c16-22dd-9774475ee279/00602438598663_Cover.jpg/600x600bb.jpg',
+  },
+  {
+    song: 'Rapariga Não',
+    artist: 'João Neto & Frederico, Simone & Simaria',
+    cover:
+      'https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/85/7f/dc/857fdc16-057e-c4c3-c823-505937b0c6af/7891430185572.jpg/600x600bb.jpg',
+  },
 ]
 
 /* ---------- Agenda de shows ----------

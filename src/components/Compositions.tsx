@@ -59,6 +59,21 @@ export default function Compositions() {
     [tracks],
   )
 
+  // Espelhos do estado para os ouvintes de áudio: eles são registrados uma vez
+  // só e, sem isto, enxergariam os valores do render em que nasceram.
+  const tracksRef = useRef<Track[]>([])
+  const mutedRef = useRef(muted)
+  const activeRef = useRef(active)
+  useEffect(() => {
+    tracksRef.current = tracks
+  }, [tracks])
+  useEffect(() => {
+    mutedRef.current = muted
+  }, [muted])
+  useEffect(() => {
+    activeRef.current = active
+  }, [active])
+
   const getAudio = () => {
     if (!audioRef.current) {
       const a = new Audio()
@@ -68,8 +83,17 @@ export default function Compositions() {
     return audioRef.current
   }
 
+  /**
+   * Toca a faixa `i`.
+   *
+   * IMPORTANTE: precisa ser chamada DENTRO da pilha do toque do usuário. O
+   * Safari do iOS só libera o áudio quando play() parte do próprio gesto —
+   * de um efeito ou timer disparado depois, ele recusa com NotAllowedError.
+   * Por isso os controles chamam esta função direto, em vez de reagir à
+   * troca de `active` por um useEffect (que roda só após a renderização).
+   */
   const playIndex = (i: number) => {
-    const url = tracks[i]?.previewUrl
+    const url = tracksRef.current[i]?.previewUrl
     const a = getAudio()
     if (!url) {
       a.pause()
@@ -77,7 +101,7 @@ export default function Compositions() {
       return
     }
     if (a.src !== url) a.src = url
-    a.muted = muted
+    a.muted = mutedRef.current
     a.play()
       .then(() => {
         setIsPlaying(true)
@@ -85,6 +109,12 @@ export default function Compositions() {
         window.dispatchEvent(new CustomEvent('pp:audio', { detail: 'compositions' }))
       })
       .catch(() => setIsPlaying(false))
+  }
+
+  /** Muda o foco e, se já estiver tocando, emenda o áudio no mesmo gesto. */
+  const goTo = (i: number) => {
+    setActive(i)
+    if (isPlaying) playIndex(i)
   }
 
   const togglePlay = () => {
@@ -105,14 +135,8 @@ export default function Compositions() {
     })
   }
 
-  const prev = () => setActive((a) => (a - 1 + len) % len)
-  const next = () => setActive((a) => (a + 1) % len)
-
-  // Trocou a faixa em foco enquanto toca → troca o áudio junto
-  useEffect(() => {
-    if (isPlaying) playIndex(active)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active])
+  const prev = () => goTo((active - 1 + len) % len)
+  const next = () => goTo((active + 1) % len)
 
   // Se a trilha do site começar a tocar, este player pausa
   useEffect(() => {
@@ -126,10 +150,15 @@ export default function Compositions() {
     return () => window.removeEventListener('pp:audio', onOther)
   }, [])
 
-  // Fim da prévia → avança para a próxima automaticamente
+  // Fim da prévia → avança e emenda a próxima. Aqui o iOS permite, porque o
+  // elemento de áudio já foi liberado pelo toque que iniciou a reprodução.
   useEffect(() => {
     const a = getAudio()
-    const onEnded = () => setActive((v) => (v + 1) % len)
+    const onEnded = () => {
+      const nxt = (activeRef.current + 1) % len
+      setActive(nxt)
+      playIndex(nxt)
+    }
     a.addEventListener('ended', onEnded)
     return () => {
       a.removeEventListener('ended', onEnded)
@@ -160,7 +189,7 @@ export default function Compositions() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <Coverflow items={covers} active={active} onActiveChange={setActive} />
+          <Coverflow items={covers} active={active} onActiveChange={goTo} />
           <div className="mt-14">
             <PlayerBar
               items={covers}
