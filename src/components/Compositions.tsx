@@ -5,72 +5,32 @@ import PlayerBar from './ui/PlayerBar'
 import FlowingLines from './ui/FlowingLines'
 import { compositions, socials } from '../data/site'
 
-/** Prévia de 30s + capa real, buscadas na API pública do iTunes. */
-type Track = { previewUrl?: string; artwork?: string }
-
 export default function Compositions() {
   const len = compositions.length
   const [active, setActive] = useState(Math.floor(len / 2))
   const [isPlaying, setIsPlaying] = useState(false)
   const [muted, setMuted] = useState(false)
   const [paused, setPaused] = useState(false)
-  const [tracks, setTracks] = useState<Track[]>([])
   const audioRef = useRef<HTMLAudioElement | null>(null)
-
-  // Busca prévias e capas reais (API pública, sem chave)
-  useEffect(() => {
-    let alive = true
-    Promise.all(
-      compositions.map(async (c): Promise<Track> => {
-        try {
-          const term = encodeURIComponent(`${c.song} ${c.artist.split(',')[0]}`)
-          const res = await fetch(
-            `https://itunes.apple.com/search?term=${term}&media=music&entity=song&limit=1&country=BR`,
-          )
-          const data = await res.json()
-          const r = data.results?.[0]
-          return r
-            ? {
-                previewUrl: r.previewUrl as string | undefined,
-                artwork: typeof r.artworkUrl100 === 'string'
-                  ? r.artworkUrl100.replace('100x100', '600x600')
-                  : undefined,
-              }
-            : {}
-        } catch {
-          return {}
-        }
-      }),
-    ).then((t) => {
-      if (alive) setTracks(t)
-    })
-    return () => {
-      alive = false
-    }
-  }, [])
 
   const covers: CoverItem[] = useMemo(
     () =>
-      compositions.map((c, i) => ({
+      compositions.map((c) => ({
         title: c.song,
         subtitle: c.artist,
-        cover: tracks[i]?.artwork ?? c.cover,
+        cover: c.cover,
       })),
-    [tracks],
+    [],
   )
 
   // Espelhos do estado para os ouvintes de áudio: eles são registrados uma vez
   // só e, sem isto, enxergariam os valores do render em que nasceram.
-  const tracksRef = useRef<Track[]>([])
   const mutedRef = useRef(muted)
   const activeRef = useRef(active)
   // "O usuário quer ouvir": decidido no próprio toque. É um ref, e não estado,
   // porque `isPlaying` chega atrasado (depende da promessa do play() resolver)
   // e não serve para decidir, no gesto, se a próxima faixa deve tocar.
   const wantsPlayRef = useRef(false)
-  useEffect(() => {
-    tracksRef.current = tracks
-  }, [tracks])
   useEffect(() => {
     mutedRef.current = muted
   }, [muted])
@@ -97,7 +57,7 @@ export default function Compositions() {
    * troca de `active` por um useEffect (que roda só após a renderização).
    */
   const playIndex = (i: number) => {
-    const url = tracksRef.current[i]?.previewUrl
+    const url = compositions[i]?.preview
     const a = getAudio()
     if (!url) {
       a.pause()
