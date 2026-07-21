@@ -1,4 +1,4 @@
-import { Gem, Trophy, TrendingUp, Globe2 } from 'lucide-react'
+import { TrendingUp } from 'lucide-react'
 import Reveal from './ui/Reveal'
 import Card3D from './ui/Card3D'
 import Counter from './ui/Counter'
@@ -6,7 +6,6 @@ import FlowingLines from './ui/FlowingLines'
 import { achievements, socialStats } from '../data/site'
 import { SpotifyIcon, YoutubeIcon, InstagramIcon } from './icons/BrandIcons'
 
-const icons = [TrendingUp, Gem, Trophy, Globe2]
 const platformIcon: Record<string, React.ComponentType<{ className?: string }>> = {
   Spotify: SpotifyIcon,
   YouTube: YoutubeIcon,
@@ -31,36 +30,29 @@ export default function Stats() {
           </h2>
         </Reveal>
 
-        {/* Cards de conquista — estrutura alinhada:
-            [ícone + rótulo] / número / contexto fixado na base */}
-        <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {achievements.map((item, i) => {
-            const Icon = icons[i % icons.length]
-            return (
-              <Card3D
-                key={item.value}
-                delay={i * 0.08}
-                className="card-dark h-full rounded-2xl transition-colors duration-300 hover:border-gold/40"
-              >
-                <div className="flex h-full flex-col p-6">
-                  <div className="depth-sm flex items-center gap-2.5">
-                    <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-gold/25 bg-gold/10 text-gold">
-                      <Icon className="h-[18px] w-[18px]" />
-                    </span>
-                    <span className="font-heading text-[10px] font-semibold uppercase tracking-widest2 text-muted">
-                      {item.label}
-                    </span>
-                  </div>
-                  <Counter
-                    value={item.value}
-                    className="mt-5 block font-display text-[1.9rem] font-semibold leading-[1.02] tracking-[-0.01em] text-gold-grad [font-variant-numeric:tabular-nums] xl:text-[2.1rem]"
-                  />
-                  <p className="mt-auto pt-4 text-sm text-muted">{item.sub}</p>
+        {/* Número-síntese: o total de execuções somando as plataformas.
+            Um destaque só, no lugar dos antigos quatro cards. */}
+        {achievements[0] && (
+          <Reveal>
+            <Card3D className="card-dark mx-auto max-w-3xl rounded-2xl transition-colors duration-300 hover:border-gold/40">
+              <div className="flex flex-col items-center gap-4 px-6 py-10 text-center sm:py-12">
+                <span className="depth-sm flex h-12 w-12 items-center justify-center rounded-xl border border-gold/25 bg-gold/10 text-gold">
+                  <TrendingUp className="h-6 w-6" />
+                </span>
+                <Counter
+                  value={achievements[0].value}
+                  className="block font-display text-[clamp(2.6rem,7vw,4rem)] font-semibold leading-[1] tracking-[-0.02em] text-gold-grad [font-variant-numeric:tabular-nums]"
+                />
+                <div>
+                  <p className="font-display text-lg font-medium text-cream sm:text-xl">
+                    {achievements[0].label}
+                  </p>
+                  <p className="mt-1 text-sm text-muted">{achievements[0].sub}</p>
                 </div>
-              </Card3D>
-            )
-          })}
-        </div>
+              </div>
+            </Card3D>
+          </Reveal>
+        )}
 
         {/* Faixa de números de redes */}
         <Reveal delay={0.1}>

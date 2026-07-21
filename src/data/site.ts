@@ -38,35 +38,25 @@ export const socials = {
 // ID do artista no Spotify (usado no player incorporado)
 export const spotifyArtistId = '3whgFbrRxsOmYVrq3t4hCY'
 
-/* ---------- Conquistas / autoridade (cards de destaque) ---------- */
+/* ---------- Conquista de destaque (número-síntese) ----------
+ * Um total só, somando as plataformas — pedido do artista para condensar
+ * os antigos quatro cards (execuções do “Ameaça”, certificação Triplo
+ * Diamante, Top 1 Spotify Brasil e Top 200 Global). É um array de um item
+ * porque a home ainda percorre `achievements` (cartão de destaque + rotador
+ * “Em alta” no hero); para voltar a ter vários, basta acrescentar objetos. */
 export const achievements = [
   {
-    value: '+650 milhões',
+    value: '+925 milhões',
     label: 'de execuções',
-    sub: 'com o hit “Ameaça”',
-  },
-  {
-    value: 'Triplo Diamante',
-    label: 'certificação',
-    sub: 'conquistada com “Ameaça”',
-  },
-  {
-    value: 'Top 1',
-    label: 'Spotify Brasil',
-    sub: 'sucesso nacional nas plataformas',
-  },
-  {
-    value: 'Top 200',
-    label: 'Global',
-    sub: 'alcance internacional',
+    sub: 'somando Spotify e YouTube',
   },
 ]
 
 /* ---------- Números de redes (fácil de atualizar) ---------- */
 export const socialStats = [
-  { platform: 'Spotify', value: '2 milhões', label: 'ouvintes mensais' },
-  { platform: 'YouTube', value: '505 mil', label: 'inscritos' },
-  { platform: 'Instagram', value: '283 mil', label: 'seguidores' },
+  { platform: 'Spotify', value: '+2 milhões', label: 'ouvintes mensais' },
+  { platform: 'YouTube', value: '+550 mil', label: 'inscritos' },
+  { platform: 'Instagram', value: '+464 mil', label: 'seguidores' },
 ]
 
 /* ---------- Linha do tempo (biografia) ---------- */
