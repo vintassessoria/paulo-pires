@@ -28,7 +28,7 @@ const eventIcons: Record<string, React.ComponentType<{ className?: string }>> = 
 
 export default function Booking() {
   return (
-    <section id="contrate" className="relative overflow-hidden border-t border-white/5 py-24 sm:py-32">
+    <section id="contato" className="relative overflow-hidden border-t border-white/5 py-24 sm:py-32">
       {/* Linhas fluidas atrás do recorte (direita) */}
       <FlowingLines className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden h-full w-1/2 opacity-40 lg:block" />
 

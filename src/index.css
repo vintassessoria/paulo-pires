@@ -55,7 +55,7 @@
     inset: 0;
     z-index: -2;
     background:
-      radial-gradient(115% 85% at 50% -8%, #2A1210 0%, #1A100E 45%, #120C0B 100%);
+      radial-gradient(115% 85% at 50% -8%, #2A0A11 0%, #160A0C 45%, #0B0809 100%);
   }
   /* Grão de filme vivo — tremula em passos discretos, como película */
   body::after {
@@ -79,7 +79,7 @@
   }
 
   ::selection {
-    background-color: rgba(168, 66, 60, 0.36);
+    background-color: rgba(229, 16, 46, 0.40);
     color: #fff;
   }
 
@@ -112,10 +112,20 @@
     @apply mx-auto w-full max-w-content px-5 sm:px-8;
   }
 
-  /* Acento dourado SÓLIDO (sem gradiente) */
+  /* Acento vermelho vivo (números, destaques) */
   .text-gold-grad {
-    color: #D6836A;
-    -webkit-text-fill-color: #D6836A;
+    color: #FF3D4E;
+    -webkit-text-fill-color: #FF3D4E;
+  }
+
+  /* Dourado do nome/logo — o ÚNICO dourado do site, degradê como no
+     mídia kit. Reservado ao wordmark "Paulo Pires". */
+  .wordmark-gold {
+    background: linear-gradient(180deg, #F7DCA0 0%, #E3AE63 45%, #C6923F 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 
   /* Painéis — discretos, sem brilho exagerado */
@@ -147,19 +157,19 @@
     border: 1px solid rgba(255, 255, 255, 0.07);
   }
 
-  /* Linha decorativa fina dourada */
+  /* Linha decorativa fina vermelha */
   .hairline-gold {
-    background: linear-gradient(90deg, transparent, rgba(168, 66, 60, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(229, 16, 46, 0.55), transparent);
   }
 
-  /* Botão vinho sólido com brilho que varre no hover */
+  /* Botão vermelho sólido com brilho que varre no hover */
   .btn-gold {
     @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3 font-heading text-sm font-semibold tracking-wide transition-colors duration-200;
-    background-color: #A8423C;
-    color: #F6EDE0;
+    background-color: #E5102E;
+    color: #FFF3F1;
   }
   .btn-gold:hover {
-    background-color: #BB4E45;
+    background-color: #FF2A43;
   }
   .btn-gold::after {
     content: '';
@@ -194,7 +204,7 @@
 
   .eyebrow {
     @apply font-heading text-xs font-semibold uppercase tracking-widest2;
-    color: #D6836A;
+    color: #FF4152;
   }
 
   /* Sombra de texto discreta (sobre foto) */
