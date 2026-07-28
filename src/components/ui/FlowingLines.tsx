@@ -22,7 +22,7 @@ export default function FlowingLines({ className = '' }: { className?: string })
             key={i}
             d={base}
             transform={`translate(${i * 26 - 40} 0)`}
-            stroke={`rgba(214,131,106,${0.26 - i * 0.02})`}
+            stroke={`rgba(255,122,72,${0.26 - i * 0.02})`}
             strokeWidth={1}
           />
         ))}

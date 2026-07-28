@@ -107,7 +107,7 @@ function LivingTimeline() {
                 initial={{ opacity: 0, x: 18 }}
                 animate={{ opacity: isActive ? 0.07 : 0, x: isActive ? 0 : 18 }}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                className="pointer-events-none absolute -top-5 right-0 select-none font-display text-[4.4rem] font-semibold italic leading-none text-warm-100"
+                className="pointer-events-none absolute -top-5 right-0 select-none font-display text-[4.8rem] leading-none text-white/10"
               >
                 {item.year}
               </motion.span>
@@ -150,8 +150,8 @@ export default function Biography() {
               <span className="eyebrow !text-gold" style={{ textShadow: 'none' }}>
                 Biografia
               </span>
-              <h2 className="mt-3 text-balance font-display text-[clamp(2rem,4vw,2.9rem)] font-semibold leading-[1.08] tracking-[-0.01em] text-cream">
-                A história por trás da <span className="italic font-normal text-warm-100">voz</span>
+              <h2 className="mt-3 text-balance font-display text-[clamp(2.4rem,5vw,4rem)] uppercase leading-[0.92] tracking-[0.005em] text-cream">
+                A história por trás da <span className="text-gold">voz</span>
               </h2>
             </Reveal>
 

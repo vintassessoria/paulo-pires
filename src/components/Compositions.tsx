@@ -189,8 +189,8 @@ export default function Compositions() {
         <div className="mt-24">
           <Reveal className="mb-10 text-center">
             <span className="eyebrow">Discografia como compositor</span>
-            <h3 className="mt-3 text-balance font-display text-[clamp(1.6rem,3vw,2.3rem)] font-semibold leading-tight text-white">
-              A assinatura dele em <span className="italic font-normal text-warm-100">dezenas de sucessos</span>
+            <h3 className="mt-3 text-balance font-display text-[clamp(1.9rem,4vw,3rem)] uppercase leading-[0.95] tracking-[0.005em] text-cream">
+              A assinatura dele em <span className="text-gold">dezenas de sucessos</span>
             </h3>
           </Reveal>
 

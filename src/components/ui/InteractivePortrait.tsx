@@ -44,9 +44,9 @@ void main(){
   vec3 rev  = texture2D(u_rev, tuv + disp).rgb;
   vec3 col = mix(base, rev, mask);
 
-  // aro vermelho na transição do blob
+  // aro brasa (âmbar) na transição do blob
   float rim = smoothstep(0.0, 0.45, mask) * (1.0 - smoothstep(0.45, 0.95, mask));
-  col += vec3(0.90, 0.06, 0.18) * rim * 0.55;
+  col += vec3(1.0, 0.35, 0.12) * rim * 0.6;
 
   // vinheta suave (funde bordas no preto)
   float r = distance(uv, vec2(0.5, 0.44));
