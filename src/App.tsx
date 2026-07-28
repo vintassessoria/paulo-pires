@@ -1,8 +1,10 @@
 import { MotionConfig } from 'framer-motion'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import StatementBand from './components/StatementBand'
 import TopSongs from './components/TopSongs'
 import Biography from './components/Biography'
+import ParallaxFeed from './components/ParallaxFeed'
 import Audience from './components/Audience'
 import Media from './components/Media'
 import Compositions from './components/Compositions'
@@ -46,6 +48,9 @@ export default function App() {
               </div>
             </div>
 
+            {/* Manifesto com cápsula de imagem (efeito do modelo) */}
+            <StatementBand />
+
             {/* As Mais Ouvidas */}
             <div className="relative isolate">
               <SectionFX variant="washes" />
@@ -57,6 +62,9 @@ export default function App() {
               <SectionFX variant="orbs" />
               <Biography />
             </div>
+
+            {/* Feed de fotos com parallax (efeito do modelo) */}
+            <ParallaxFeed />
 
             {/* Público */}
             <div className="relative isolate">
