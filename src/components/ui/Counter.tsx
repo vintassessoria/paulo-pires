@@ -16,8 +16,11 @@ type Props = {
 export default function Counter({ value, className, duration = 1.6 }: Props) {
   const ref = useRef<HTMLSpanElement>(null)
 
-  const match = value.match(/[\d.,]+/)
-  const target = match ? parseInt(match[0].replace(/[.,]/g, ''), 10) : 0
+  // pt-BR: "." separa milhar, "," separa decimal. Anima só a parte inteira e
+  // mantém a casa decimal fixa (ex.: "+2,3 milhões" conta 0→2 e exibe ",3").
+  const match = value.match(/([\d.]+)(?:,(\d+))?/)
+  const target = match ? parseInt(match[1].replace(/\./g, ''), 10) : 0
+  const decimals = match && match[2] ? ',' + match[2] : ''
   const prefix = match ? value.slice(0, match.index) : ''
   const suffix = match ? value.slice((match.index ?? 0) + match[0].length) : ''
 
@@ -85,6 +88,7 @@ export default function Counter({ value, className, duration = 1.6 }: Props) {
     <span ref={ref} className={className}>
       {prefix}
       {count.toLocaleString('pt-BR')}
+      {decimals}
       {suffix}
     </span>
   )
