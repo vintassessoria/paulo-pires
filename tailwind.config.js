@@ -4,31 +4,39 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Base — preto quente (com fundo de vinho nas sombras)
-        ink: '#100B0A',
-        coal: '#17100E',
-        graphite: '#1C1512',
-        ash: '#241A16',
-        smoke: '#31241E',
-        // Acento — vinho / oxblood (usado com expressão)
+        // Base — preto profundo com leve calor de vermelho nas sombras
+        ink: '#0B0809',
+        coal: '#131011',
+        graphite: '#1A1517',
+        ash: '#221A1C',
+        smoke: '#2E2224',
+        // Acento — VERMELHO VIVO (identidade do mídia kit 2026).
+        // Mantém o nome `gold` por compatibilidade com o site inteiro; o
+        // valor agora é vermelho. O dourado real vive só em `.wordmark-gold`
+        // e no token `wm` abaixo, reservado ao nome/logo do artista.
         gold: {
-          light: '#D6836A',
-          DEFAULT: '#A8423C',
-          deep: '#5E2622',
+          light: '#FF3D4E',
+          DEFAULT: '#E5102E',
+          deep: '#7A0E1C',
         },
-        amber: '#C2663F',
-        ember: '#B5623F',
-        // Apoio — terracota / barro quente
-        clay: '#7A3B28',
+        amber: '#F5233B',
+        ember: '#F5233B',
+        // Dourado do wordmark (SÓ para o nome/logo do Paulo Pires)
+        wm: {
+          light: '#F7DCA0',
+          DEFAULT: '#E3AE63',
+          deep: '#C6923F',
+        },
+        clay: '#8E1420',
         cream: '#F1E7D8',
-        muted: '#A99A88',
-        // Terracota (washes quentes e destaques)
+        muted: '#A2938C',
+        // Vermelho de apoio (washes e destaques quentes)
         warm: {
-          100: '#F0D9C4',
-          300: '#D79B72',
-          500: '#B5623F',
-          700: '#7A3B28',
-          900: '#2A1613',
+          100: '#FBE0E4',
+          300: '#F26A7A',
+          500: '#E5102E',
+          700: '#8E1420',
+          900: '#2A0C0E',
         },
       },
       fontFamily: {
@@ -47,9 +55,11 @@ export default {
         glow: '0 24px 60px -28px rgba(0,0,0,0.9)',
       },
       backgroundImage: {
-        'gold-grad': 'linear-gradient(180deg, #D6836A, #A8423C)',
+        'gold-grad': 'linear-gradient(180deg, #FF3D4E, #E5102E)',
+        'wordmark-grad':
+          'linear-gradient(180deg, #F7DCA0 0%, #E3AE63 45%, #C6923F 100%)',
         'stage-radial':
-          'radial-gradient(60% 50% at 50% 0%, rgba(168,66,60,0.14) 0%, rgba(16,11,10,0) 70%)',
+          'radial-gradient(60% 50% at 50% 0%, rgba(229,16,46,0.16) 0%, rgba(11,8,9,0) 70%)',
       },
       keyframes: {
         floaty: {
