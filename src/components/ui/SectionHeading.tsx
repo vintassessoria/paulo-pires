@@ -31,10 +31,10 @@ export default function SectionHeading({
       <RevealText
         text={title}
         as="h2"
-        className="block text-balance font-display text-[clamp(2.05rem,4.4vw,3.1rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-white text-shadow-warm"
+        className="block text-balance font-display text-[clamp(2.6rem,6vw,5rem)] uppercase leading-[0.9] tracking-[0.005em] text-cream"
       />
       {description && (
-        <p className="mt-4 text-pretty text-base leading-relaxed text-white/85 text-shadow-warm sm:text-lg">
+        <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/70 sm:text-lg">
           {description}
         </p>
       )}

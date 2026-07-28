@@ -42,8 +42,8 @@ export default function Booking() {
                 Contratação de shows
               </span>
             </div>
-            <h2 className="text-balance font-display text-[clamp(2.15rem,4.4vw,3.1rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-white text-shadow-warm">
-              Contrate <span className="italic font-normal text-warm-100">Paulo Pires</span>
+            <h2 className="text-balance font-display text-[clamp(2.6rem,6vw,5rem)] uppercase leading-[0.9] tracking-[0.005em] text-cream">
+              Contrate <span className="text-gold">Paulo Pires</span>
             </h2>
             <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/85 text-shadow-warm sm:text-lg">
               Leve para o seu evento um show com repertório envolvente, presença de palco e a
