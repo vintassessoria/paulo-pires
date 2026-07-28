@@ -3,7 +3,7 @@ import { motion, useScroll, useSpring, useTransform } from 'framer-motion'
 import Reveal from './ui/Reveal'
 import Card3D from './ui/Card3D'
 import ArtistImage from './ui/ArtistImage'
-import { timeline } from '../data/site'
+import { timeline, bio } from '../data/site'
 
 /**
  * Linha do tempo "viva":
@@ -139,13 +139,6 @@ function LivingTimeline() {
   )
 }
 
-const paragraphs = [
-  'Paulo Pires nasceu em Goiás, em 1986, e cresceu cercado por influências musicais de familiares e amigos. Aos 12 anos, já fazia parte de uma banda, dando seus primeiros passos em uma trajetória que logo se tornaria nacional.',
-  'Aos 19, iniciou sua carreira como compositor no meio secular e, em 2013, decidiu também seguir carreira solo, gravando seu primeiro CD. Depois desse projeto, passou a se dedicar integralmente à composição, assinando grandes sucessos que ganharam o Brasil na voz de artistas como Marília Mendonça, Gusttavo Lima, Mano Walter, Maiara & Maraisa, entre outros.',
-  'Em 2020, ao lado da Best Produções Artísticas, Paulo retomou sua carreira como cantor. Com letras descontraídas, melodias cativantes e uma identidade que mistura sertanejo, pop e romantismo, suas músicas passaram a alcançar cada vez mais público nas plataformas digitais.',
-  'O hit “Ameaça”, lançado em 2021 em parceria com MC Danny e Marcynho, marcou uma nova fase em sua carreira: certificado triplo de Diamante, mais de 650 milhões de execuções e o topo do Spotify Brasil, além de entrar no Top 200 Global.',
-]
-
 export default function Biography() {
   return (
     <section id="biografia" className="relative overflow-hidden border-t border-white/5 py-24 sm:py-32">
@@ -163,7 +156,7 @@ export default function Biography() {
             </Reveal>
 
             <div className="mt-6 space-y-4">
-              {paragraphs.map((p, i) => (
+              {bio.map((p, i) => (
                 <Reveal key={i} delay={0.05 * i}>
                   <p className="text-pretty text-[0.975rem] leading-relaxed text-muted sm:text-base">{p}</p>
                 </Reveal>
