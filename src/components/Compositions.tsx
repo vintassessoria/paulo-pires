@@ -3,7 +3,8 @@ import SectionHeading from './ui/SectionHeading'
 import Coverflow, { type CoverItem } from './ui/Coverflow'
 import PlayerBar from './ui/PlayerBar'
 import FlowingLines from './ui/FlowingLines'
-import { compositions, socials } from '../data/site'
+import { compositions, compositionCredits, socials } from '../data/site'
+import Reveal from './ui/Reveal'
 
 export default function Compositions() {
   const len = compositions.length
@@ -181,6 +182,38 @@ export default function Compositions() {
               onToggleMute={toggleMute}
               spotifyUrl={socials.spotify}
             />
+          </div>
+        </div>
+
+        {/* Créditos completos, agrupados por artista (como no mídia kit) */}
+        <div className="mt-24">
+          <Reveal className="mb-10 text-center">
+            <span className="eyebrow">Discografia como compositor</span>
+            <h3 className="mt-3 text-balance font-display text-[clamp(1.6rem,3vw,2.3rem)] font-semibold leading-tight text-white">
+              A assinatura dele em <span className="italic font-normal text-warm-100">dezenas de sucessos</span>
+            </h3>
+          </Reveal>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {compositionCredits.map((group, gi) => (
+              <Reveal key={group.artist} delay={(gi % 3) * 0.06}>
+                <div className="card-dark h-full rounded-2xl p-5">
+                  <p className="mb-3 border-b border-white/[0.07] pb-3 font-heading text-base font-semibold text-cream">
+                    {group.artist}
+                  </p>
+                  <ul className="space-y-2">
+                    {group.songs.map((s) => (
+                      <li key={s.title} className="flex items-baseline justify-between gap-3">
+                        <span className="min-w-0 flex-1 truncate text-sm text-white/80">{s.title}</span>
+                        <span className="shrink-0 font-display text-sm font-semibold tabular-nums text-gold-light">
+                          {s.plays}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </div>
