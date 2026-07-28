@@ -35,8 +35,8 @@
 
   body {
     @apply font-sans antialiased;
-    color: #ECE6DA;
-    background-color: #0A0A0A;
+    color: #F2ECE0;
+    background-color: #0A0908;
     overflow-x: hidden;
     font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
   }
@@ -55,7 +55,7 @@
     inset: 0;
     z-index: -2;
     background:
-      radial-gradient(115% 85% at 50% -8%, #2A0A11 0%, #160A0C 45%, #0B0809 100%);
+      radial-gradient(120% 80% at 50% -10%, #1E0F06 0%, #130C08 45%, #0A0908 100%);
   }
   /* Grão de filme vivo — tremula em passos discretos, como película */
   body::after {
@@ -79,8 +79,8 @@
   }
 
   ::selection {
-    background-color: rgba(229, 16, 46, 0.40);
-    color: #fff;
+    background-color: rgba(255, 90, 31, 0.45);
+    color: #160A03;
   }
 
   /* Esconde o cursor nativo quando o personalizado está ativo */
@@ -112,16 +112,15 @@
     @apply mx-auto w-full max-w-content px-5 sm:px-8;
   }
 
-  /* Acento vermelho vivo (números, destaques) */
+  /* Acento âmbar-brasa (números, destaques) */
   .text-gold-grad {
-    color: #FF3D4E;
-    -webkit-text-fill-color: #FF3D4E;
+    color: #FF7A48;
+    -webkit-text-fill-color: #FF7A48;
   }
 
-  /* Dourado do nome/logo — o ÚNICO dourado do site, degradê como no
-     mídia kit. Reservado ao wordmark "Paulo Pires". */
+  /* Wordmark do nome — no bold é osso quente (off-white), com leve sheen. */
   .wordmark-gold {
-    background: linear-gradient(180deg, #F7DCA0 0%, #E3AE63 45%, #C6923F 100%);
+    background: linear-gradient(180deg, #F6F0E4 0%, #E7DECB 55%, #CBB89E 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -157,19 +156,19 @@
     border: 1px solid rgba(255, 255, 255, 0.07);
   }
 
-  /* Linha decorativa fina vermelha */
+  /* Linha decorativa fina brasa */
   .hairline-gold {
-    background: linear-gradient(90deg, transparent, rgba(229, 16, 46, 0.55), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 90, 31, 0.55), transparent);
   }
 
-  /* Botão vermelho sólido com brilho que varre no hover */
+  /* Botão brasa sólido, texto quase-preto (contraste bold) + brilho no hover */
   .btn-gold {
-    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3 font-heading text-sm font-semibold tracking-wide transition-colors duration-200;
-    background-color: #E5102E;
-    color: #FFF3F1;
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3.5 font-heading text-xs font-bold uppercase tracking-wide transition-colors duration-200;
+    background-color: #FF5A1F;
+    color: #160A03;
   }
   .btn-gold:hover {
-    background-color: #FF2A43;
+    background-color: #FF7A48;
   }
   .btn-gold::after {
     content: '';
@@ -203,8 +202,8 @@
   }
 
   .eyebrow {
-    @apply font-heading text-xs font-semibold uppercase tracking-widest2;
-    color: #FF4152;
+    @apply font-heading text-xs font-bold uppercase tracking-widest2;
+    color: #FF5A1F;
   }
 
   /* Sombra de texto discreta (sobre foto) */

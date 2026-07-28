@@ -4,45 +4,47 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Base — preto profundo com leve calor de vermelho nas sombras
-        ink: '#0B0809',
-        coal: '#131011',
-        graphite: '#1A1517',
-        ash: '#221A1C',
-        smoke: '#2E2224',
-        // Acento — VERMELHO VIVO (identidade do mídia kit 2026).
-        // Mantém o nome `gold` por compatibilidade com o site inteiro; o
-        // valor agora é vermelho. O dourado real vive só em `.wordmark-gold`
-        // e no token `wm` abaixo, reservado ao nome/logo do artista.
+        // Base — preto profundo (estilo bold), leve calor nas sombras
+        ink: '#0A0908',
+        coal: '#121010',
+        graphite: '#191615',
+        ash: '#221D1B',
+        smoke: '#2C2623',
+        // Acento — ÂMBAR-BRASA / TANGERINA (identidade bold 2026).
+        // Mantém o nome `gold` por compatibilidade com o site inteiro;
+        // o valor agora é brasa. Luz de palco, energia.
         gold: {
-          light: '#FF3D4E',
-          DEFAULT: '#E5102E',
-          deep: '#7A0E1C',
+          light: '#FF7A48',
+          DEFAULT: '#FF5A1F',
+          deep: '#B23A12',
         },
-        amber: '#F5233B',
-        ember: '#F5233B',
-        // Dourado do wordmark (SÓ para o nome/logo do Paulo Pires)
+        amber: '#FF5A1F',
+        ember: '#FF7A48',
+        // Wordmark: no bold o nome é osso quente (não mais dourado)
         wm: {
-          light: '#F7DCA0',
-          DEFAULT: '#E3AE63',
-          deep: '#C6923F',
+          light: '#F6F0E4',
+          DEFAULT: '#F2ECE0',
+          deep: '#CBB89E',
         },
-        clay: '#8E1420',
-        cream: '#F1E7D8',
-        muted: '#A2938C',
-        // Vermelho de apoio (washes e destaques quentes)
+        clay: '#B23A12',
+        cream: '#F4EEE3',
+        muted: '#98918A',
+        // Brasa de apoio (washes e destaques quentes)
         warm: {
-          100: '#FBE0E4',
-          300: '#F26A7A',
-          500: '#E5102E',
-          700: '#8E1420',
-          900: '#2A0C0E',
+          100: '#FCE7D6',
+          300: '#FF9A6B',
+          500: '#FF5A1F',
+          700: '#B23A12',
+          900: '#2A1509',
         },
       },
       fontFamily: {
-        display: ['Fraunces', 'Georgia', 'serif'],
-        heading: ['Outfit', 'sans-serif'],
-        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        // Anton = títulos gigantes de pôster (maiúsculas, condensada, pesada)
+        display: ['Anton', 'Arial Narrow', 'sans-serif'],
+        // Archivo Expanded para subtítulos/rótulos com presença
+        heading: ['"Archivo Expanded"', 'Archivo', 'sans-serif'],
+        // Archivo grotesca limpa no corpo/UI
+        sans: ['Archivo', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
         widest2: '0.28em',
@@ -55,11 +57,11 @@ export default {
         glow: '0 24px 60px -28px rgba(0,0,0,0.9)',
       },
       backgroundImage: {
-        'gold-grad': 'linear-gradient(180deg, #FF3D4E, #E5102E)',
+        'gold-grad': 'linear-gradient(180deg, #FF7A48, #FF5A1F)',
         'wordmark-grad':
-          'linear-gradient(180deg, #F7DCA0 0%, #E3AE63 45%, #C6923F 100%)',
+          'linear-gradient(180deg, #F6F0E4 0%, #E7DECB 55%, #CBB89E 100%)',
         'stage-radial':
-          'radial-gradient(60% 50% at 50% 0%, rgba(229,16,46,0.16) 0%, rgba(11,8,9,0) 70%)',
+          'radial-gradient(60% 50% at 50% 0%, rgba(255,90,31,0.16) 0%, rgba(10,9,8,0) 70%)',
       },
       keyframes: {
         floaty: {
