@@ -39,12 +39,11 @@ export default {
         },
       },
       fontFamily: {
-        // Anton = títulos gigantes de pôster (maiúsculas, condensada, pesada)
-        display: ['Anton', 'Arial Narrow', 'sans-serif'],
-        // Archivo Expanded para subtítulos/rótulos com presença
-        heading: ['"Archivo Expanded"', 'Archivo', 'sans-serif'],
-        // Archivo grotesca limpa no corpo/UI
-        sans: ['Archivo', 'system-ui', 'sans-serif'],
+        // Clash Display = títulos maiúsculos, elegantes (estilo Porto)
+        display: ['"Clash Display"', 'system-ui', 'sans-serif'],
+        // Inter para rótulos/UI e corpo — limpo e minimalista
+        heading: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
         widest2: '0.28em',

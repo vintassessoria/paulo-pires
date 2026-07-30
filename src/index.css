@@ -44,6 +44,7 @@
   /* Fraunces é variável: o eixo óptico deixa as letras mais elegantes
      em displays grandes e mais legíveis em tamanhos menores */
   .font-display {
+    font-weight: 600;
     font-optical-sizing: auto;
     text-rendering: optimizeLegibility;
   }

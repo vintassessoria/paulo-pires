@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { animate, stagger } from 'animejs'
 import { Play, ArrowUpRight } from 'lucide-react'
 import InteractivePortrait from './ui/InteractivePortrait'
+import LiveStatus from './ui/LiveStatus'
 import { socialItems } from './icons/BrandIcons'
 import { socials, whatsappLink, achievements } from '../data/site'
 
@@ -119,11 +120,14 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-5 flex items-center gap-3"
+            transition={{ duration: 0.6, delay: 0.05 }}
+            className="mb-5"
           >
-            <span className="h-2.5 w-2.5 rounded-full bg-gold" />
-            <span className="eyebrow">Cantor &amp; Compositor — Goiás</span>
+            <LiveStatus className="mb-4" />
+            <div className="flex items-center gap-3">
+              <span className="h-px w-8 bg-gold" />
+              <span className="eyebrow">Cantor &amp; Compositor — Goiás</span>
+            </div>
           </motion.div>
 
           <div aria-hidden className="select-none">
