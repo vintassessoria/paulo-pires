@@ -1,6 +1,7 @@
 import { MotionConfig } from 'framer-motion'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import VideoShowcase from './components/VideoShowcase'
 import StatementBand from './components/StatementBand'
 import TopSongs from './components/TopSongs'
 import Biography from './components/Biography'
@@ -48,7 +49,10 @@ export default function App() {
               </div>
             </div>
 
-            {/* Manifesto com cápsula de imagem (efeito do modelo) */}
+            {/* Vídeo de produção — cresce/revela ao rolar */}
+            <VideoShowcase />
+
+            {/* Manifesto */}
             <StatementBand />
 
             {/* As Mais Ouvidas */}
