@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { animate, stagger } from 'animejs'
 import { Play, ArrowUpRight } from 'lucide-react'
-import InteractivePortrait from './ui/InteractivePortrait'
 import LiveStatus from './ui/LiveStatus'
 import { socialItems } from './icons/BrandIcons'
 import { socials, whatsappLink, achievements } from '../data/site'
@@ -184,20 +183,24 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Retrato interativo */}
+        {/* Foto do hero — limpa e estática (estilo Porto), com revelação
+            sutil de entrada por cortina; funde na base preta pelo gradiente */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="order-1 mx-auto w-full max-w-[22rem] lg:order-2 lg:max-w-[28rem]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="order-1 mx-auto w-full max-w-[21rem] lg:order-2 lg:max-w-[27rem]"
         >
-          <div className="relative">
-            <div className="pointer-events-none absolute -inset-4 rounded-[1.6rem] bg-[radial-gradient(closest-side,rgba(255,90,31,0.22),transparent)] blur-2xl" />
-            <InteractivePortrait
-              base="/images/portrait-base.webp"
-              reveal="/images/portrait-reveal.webp"
-              className="aspect-[1040/1320] w-full rounded-[1.2rem] border border-white/12 shadow-[0_50px_120px_-40px_rgba(0,0,0,0.9)]"
+          <div className="relative overflow-hidden rounded-[1.1rem] border border-white/10">
+            <motion.img
+              src="/images/hero-main.webp"
+              alt="Paulo Pires"
+              initial={{ clipPath: 'inset(100% 0 0 0)', scale: 1.08 }}
+              animate={{ clipPath: 'inset(0% 0 0 0)', scale: 1 }}
+              transition={{ duration: 1.1, delay: 0.3, ease: [0.65, 0, 0.35, 1] }}
+              className="aspect-[1040/1320] w-full object-cover object-top"
             />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/85 to-transparent" />
           </div>
         </motion.div>
       </div>
