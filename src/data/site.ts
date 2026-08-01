@@ -90,7 +90,9 @@ export const topSongs: {
   preview?: string
 }[] = [
   { title: 'Ameaça', credit: 'part. MC Danny e Marcynho Sensação', streams: '+650 milhões', badge: '4x Diamante',
-    cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/e7/8b/5c/e78b5cbd-04c5-f349-6bc4-361a63a91af9/8445824076237_cover.jpg/600x600bb.jpg',
+    // "Ameaça" é do Paulo (feat. MC Danny e Marcynho) — capa solo do Paulo,
+    // no lugar da capa oficial do grupo, a pedido do artista.
+    cover: '/images/ameaca-cover.webp',
     preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/5f/80/55/5f80555d-567c-fc47-e934-e54124b19b66/mzaf_6945942457561514816.plus.aac.p.m4a' },
   { title: 'Pane no Sistema', credit: 'Grego & Paulo Pires', streams: '+196 milhões',
     cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/bd/e0/81/bde0810c-265b-7681-5f20-d15e9060e842/cover.jpg/600x600bb.jpg',
