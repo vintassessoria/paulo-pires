@@ -28,7 +28,7 @@ const eventIcons: Record<string, React.ComponentType<{ className?: string }>> = 
 
 export default function Booking() {
   return (
-    <section id="contato" className="relative overflow-hidden border-t border-white/5 py-24 sm:py-32">
+    <section id="contato" className="relative overflow-hidden border-t border-ink/5 py-24 sm:py-32">
       {/* Linhas fluidas atrás do recorte (direita) */}
       <FlowingLines className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden h-full w-1/2 opacity-40 lg:block" />
 
@@ -42,10 +42,10 @@ export default function Booking() {
                 Contratação de shows
               </span>
             </div>
-            <h2 className="text-balance font-display text-[clamp(2.6rem,6vw,5rem)] uppercase leading-[0.9] tracking-[0.005em] text-cream">
+            <h2 className="text-balance font-display text-[clamp(2.6rem,6vw,5rem)] uppercase leading-[0.9] tracking-[0.005em] text-ink">
               Contrate <span className="text-gold">Paulo Pires</span>
             </h2>
-            <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-white/85 text-shadow-warm sm:text-lg">
+            <p className="mt-5 max-w-xl text-pretty text-base leading-relaxed text-ink/85 text-shadow-warm sm:text-lg">
               Leve para o seu evento um show com repertório envolvente, presença de palco e a
               assinatura de um artista que carrega grandes sucessos da música brasileira.
             </p>
@@ -62,7 +62,7 @@ export default function Booking() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.5 }}
                   transition={{ duration: 0.4, delay: i * 0.05 }}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-cream transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_10px_24px_-12px_rgba(0,0,0,0.7)]"
+                  className="inline-flex items-center gap-2 rounded-full border border-ink/10 bg-ink/[0.03] px-4 py-2 text-sm text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/40 hover:shadow-[0_10px_24px_-12px_rgba(0,0,0,0.7)]"
                 >
                   <Icon className="h-4 w-4 text-gold" />
                   {type}
@@ -93,21 +93,21 @@ export default function Booking() {
           <Reveal delay={0.15}>
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:gap-8">
               <a href={whatsappLink} target="_blank" rel="noreferrer" className="group flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/25 bg-white/[0.03] text-gold transition-colors group-hover:bg-gold/15">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/25 bg-ink/[0.03] text-gold transition-colors group-hover:bg-gold/15">
                   <Phone className="h-5 w-5" />
                 </span>
                 <div>
                   <p className="text-[0.7rem] uppercase tracking-wide text-muted">WhatsApp</p>
-                  <p className="font-heading font-semibold text-cream">{contact.whatsappDisplay}</p>
+                  <p className="font-heading font-semibold text-ink">{contact.whatsappDisplay}</p>
                 </div>
               </a>
               <a href={mailtoLink} className="group flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/25 bg-white/[0.03] text-gold transition-colors group-hover:bg-gold/15">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/25 bg-ink/[0.03] text-gold transition-colors group-hover:bg-gold/15">
                   <Mail className="h-5 w-5" />
                 </span>
                 <div>
                   <p className="text-[0.7rem] uppercase tracking-wide text-muted">E-mail</p>
-                  <p className="font-heading font-semibold text-cream">{contact.email}</p>
+                  <p className="font-heading font-semibold text-ink">{contact.email}</p>
                 </div>
               </a>
             </div>
@@ -117,7 +117,7 @@ export default function Booking() {
         {/* Retrato 3D (direita): mesmo tratamento do coverflow */}
         <div className="relative h-[54vh] lg:h-[68vh]">
           <Card3D max={7} className="h-full rounded-[1.5rem]">
-            <div className="reflect-below-lg relative h-full overflow-hidden rounded-[1.5rem] border border-white/10 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]">
+            <div className="reflect-below-lg relative h-full overflow-hidden rounded-[1.5rem] border border-ink/10 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]">
               <ArtistImage
                 src="/images/paulo-booking.jpg"
                 alt="Paulo Pires — retrato"

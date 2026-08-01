@@ -76,8 +76,8 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   aria-current={isActive ? 'true' : undefined}
-                  className={`group relative font-heading text-sm font-medium transition-colors duration-200 hover:text-white ${
-                    isActive ? 'text-white' : 'text-white/75'
+                  className={`group relative font-heading text-sm font-medium transition-colors duration-200 hover:text-ink ${
+                    isActive ? 'text-ink' : 'text-ink/75'
                   }`}
                 >
                   {link.label}
@@ -105,7 +105,7 @@ export default function Header() {
               aria-label={open ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
-              className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/20 bg-white/[0.03] text-cream transition-colors hover:border-gold/50 hover:text-gold lg:hidden"
+              className="flex h-11 w-11 items-center justify-center rounded-xl border border-gold/20 bg-ink/[0.03] text-ink transition-colors hover:border-gold/50 hover:text-gold lg:hidden"
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -143,7 +143,7 @@ export default function Header() {
                     initial={{ opacity: 0, x: -10 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.05 * i + 0.1 }}
-                    className="flex items-center justify-between rounded-xl px-4 py-3.5 font-heading text-base text-cream transition-colors hover:bg-gold/10 hover:text-gold"
+                    className="flex items-center justify-between rounded-xl px-4 py-3.5 font-heading text-base text-ink transition-colors hover:bg-gold/10 hover:text-gold"
                   >
                     {link.label}
                     <span className="text-gold/40">›</span>

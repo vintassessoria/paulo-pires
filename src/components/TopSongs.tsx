@@ -131,7 +131,7 @@ export default function TopSongs() {
                     {song.badge}
                   </span>
                 )}
-                <h3 className="font-display text-[clamp(1.9rem,4vw,3rem)] font-semibold leading-tight text-white">
+                <h3 className="font-display text-[clamp(1.9rem,4vw,3rem)] font-semibold leading-tight text-ink">
                   {song.title}
                 </h3>
                 <p className="mt-1 text-sm text-muted">{song.credit}</p>
@@ -140,7 +140,7 @@ export default function TopSongs() {
                     value={song.streams}
                     className="font-display text-[clamp(2.2rem,5vw,3.4rem)] font-semibold text-gold-grad [font-variant-numeric:tabular-nums]"
                   />
-                  <span className="text-sm uppercase tracking-wide text-white/40">de streams</span>
+                  <span className="text-sm uppercase tracking-wide text-ink/40">de streams</span>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -151,7 +151,7 @@ export default function TopSongs() {
                 type="button"
                 onClick={prev}
                 aria-label="Anterior"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-white/40 hover:text-cream"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-ink/40 hover:text-ink"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
@@ -159,7 +159,7 @@ export default function TopSongs() {
                 type="button"
                 onClick={togglePlay}
                 aria-label={isPlaying ? 'Pausar' : 'Tocar'}
-                className="flex h-14 w-14 items-center justify-center rounded-full bg-gold text-white shadow-[0_12px_30px_-8px_rgba(229,16,46,0.7)] transition-transform hover:scale-105"
+                className="flex h-14 w-14 items-center justify-center rounded-full bg-gold text-white shadow-[0_12px_30px_-8px_rgba(229,16,46,0.5)] transition-transform hover:scale-105"
               >
                 {isPlaying ? (
                   <Pause className="h-5 w-5 fill-current" />
@@ -171,7 +171,7 @@ export default function TopSongs() {
                 type="button"
                 onClick={next}
                 aria-label="Próxima"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-white/40 hover:text-cream"
+                className="flex h-11 w-11 items-center justify-center rounded-full border border-ink/15 text-ink/70 transition-colors hover:border-ink/40 hover:text-ink"
               >
                 <ChevronRight className="h-5 w-5" />
               </button>
@@ -186,7 +186,7 @@ export default function TopSongs() {
                   onClick={() => go(i)}
                   aria-label={`Ir para ${s.title}`}
                   className={`h-1.5 rounded-full transition-all ${
-                    i === active ? 'w-6 bg-gold' : 'w-1.5 bg-white/20 hover:bg-white/40'
+                    i === active ? 'w-6 bg-gold' : 'w-1.5 bg-ink/20 hover:bg-ink/40'
                   }`}
                 />
               ))}

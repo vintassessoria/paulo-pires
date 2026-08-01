@@ -53,16 +53,16 @@ export default function ArtistImage({
               <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/30 bg-gold/10 text-gold">
                 <Disc3 className="h-5 w-5" />
               </span>
-              <span className="font-heading text-sm font-semibold leading-tight text-cream">
+              <span className="font-heading text-sm font-semibold leading-tight text-ink">
                 {label}
               </span>
             </div>
           ) : (
             <div className="relative flex h-full w-full flex-col items-center justify-center gap-4 px-6 text-center">
-              <span className="font-display text-[18vw] leading-none text-white/[0.05] lg:text-[7vw]">
+              <span className="font-display text-[18vw] leading-none text-ink/[0.05] lg:text-[7vw]">
                 Paulo Pires
               </span>
-              <span className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-widest2 text-white/35">
+              <span className="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-2 text-[0.65rem] font-semibold uppercase tracking-widest2 text-ink/35">
                 <Camera className="h-3.5 w-3.5" />
                 {label}
               </span>

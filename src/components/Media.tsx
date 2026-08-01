@@ -38,10 +38,10 @@ export default function Media() {
                     <Icon className="h-[18px] w-[18px]" />
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="truncate font-heading text-sm font-semibold text-cream">
+                    <p className="truncate font-heading text-sm font-semibold text-ink">
                       {m.program}
                     </p>
-                    <span className="mt-0.5 inline-block rounded-full bg-white/[0.06] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-gold-light">
+                    <span className="mt-0.5 inline-block rounded-full bg-ink/[0.06] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-gold-light">
                       {m.outlet}
                     </span>
                   </div>

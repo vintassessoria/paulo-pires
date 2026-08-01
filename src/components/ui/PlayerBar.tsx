@@ -37,7 +37,7 @@ function RoundBtn({
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="flex h-10 w-10 items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+      className="flex h-10 w-10 items-center justify-center rounded-full text-ink/80 transition-colors hover:bg-ink/10 hover:text-ink"
     >
       {children}
     </button>
@@ -92,9 +92,9 @@ export default function PlayerBar({
         href={spotifyUrl}
         target="_blank"
         rel="noreferrer"
-        className="group flex min-w-0 flex-1 items-center gap-3 rounded-full px-2 py-1 transition-colors hover:bg-white/5"
+        className="group flex min-w-0 flex-1 items-center gap-3 rounded-full px-2 py-1 transition-colors hover:bg-ink/5"
       >
-        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/15 bg-gold-grad">
+        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-ink/15 bg-gold-grad">
           {cur.cover && (
             <img
               src={cur.cover}
@@ -118,8 +118,8 @@ export default function PlayerBar({
           </span>
         </span>
         <span className="min-w-0">
-          <span className="block truncate text-sm font-semibold text-white">{cur.title}</span>
-          <span className="block truncate text-xs text-white/60">{cur.subtitle}</span>
+          <span className="block truncate text-sm font-semibold text-ink">{cur.title}</span>
+          <span className="block truncate text-xs text-ink/60">{cur.subtitle}</span>
         </span>
       </a>
 

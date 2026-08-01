@@ -41,13 +41,13 @@ export default function Audience() {
                   <span className="text-sm text-muted">Homens</span>
                 </div>
                 <div>
-                  <span className="block font-display text-3xl font-semibold text-cream">
+                  <span className="block font-display text-3xl font-semibold text-ink">
                     {audience.gender.women}
                   </span>
                   <span className="text-sm text-muted">Mulheres</span>
                 </div>
               </div>
-              <div className="mb-8 flex h-2 overflow-hidden rounded-full bg-white/5">
+              <div className="mb-8 flex h-2 overflow-hidden rounded-full bg-ink/5">
                 <span className="bg-gold" style={{ width: audience.gender.men }} />
                 <span className="bg-warm-300/60" style={{ width: audience.gender.women }} />
               </div>
@@ -59,8 +59,8 @@ export default function Audience() {
               <div className="space-y-2.5">
                 {audience.ageRanges.map((a, i) => (
                   <div key={a.range} className="flex items-center gap-3">
-                    <span className="w-12 shrink-0 text-xs tabular-nums text-white/55">{a.range}</span>
-                    <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-white/[0.06]">
+                    <span className="w-12 shrink-0 text-xs tabular-nums text-ink/55">{a.range}</span>
+                    <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-ink/[0.06]">
                       <motion.span
                         className="block h-full rounded-full bg-gradient-to-r from-gold-deep to-gold"
                         initial={{ width: 0 }}
@@ -69,7 +69,7 @@ export default function Audience() {
                         transition={{ duration: 0.9, delay: 0.05 * i, ease: [0.22, 1, 0.36, 1] }}
                       />
                     </div>
-                    <span className="w-12 shrink-0 text-right text-xs tabular-nums text-white/70">
+                    <span className="w-12 shrink-0 text-right text-xs tabular-nums text-ink/70">
                       {a.pct.toLocaleString('pt-BR', { minimumFractionDigits: 1 })}%
                     </span>
                   </div>
@@ -85,11 +85,11 @@ export default function Audience() {
               <ul className="space-y-3">
                 {audience.cities.map((city, i) => (
                   <Reveal key={city} delay={0.05 * i} y={16}>
-                    <li className="flex items-center gap-3 border-b border-white/[0.06] pb-3">
+                    <li className="flex items-center gap-3 border-b border-ink/[0.06] pb-3">
                       <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-gold/25 bg-gold/10 text-gold">
                         <MapPin className="h-4 w-4" />
                       </span>
-                      <span className="font-heading text-base text-cream">{city}</span>
+                      <span className="font-heading text-base text-ink">{city}</span>
                     </li>
                   </Reveal>
                 ))}
@@ -104,17 +104,17 @@ export default function Audience() {
 
         {/* Números de redes */}
         <Reveal delay={0.1}>
-          <div className="card-dark mt-4 grid grid-cols-2 divide-white/10 overflow-hidden rounded-2xl sm:grid-cols-4 sm:divide-x lg:divide-x">
+          <div className="card-dark mt-4 grid grid-cols-2 divide-ink/10 overflow-hidden rounded-2xl sm:grid-cols-4 sm:divide-x lg:divide-x">
             {socialStats.map((s) => {
               const Icon = platformIcon[s.platform]
               return (
                 <div key={s.platform} className="flex flex-col gap-2 p-5 sm:p-6">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.04] text-gold">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink/[0.04] text-gold">
                     {Icon && <Icon className="h-4 w-4" />}
                   </span>
                   <Counter
                     value={s.value}
-                    className="mt-1 block font-display text-xl font-semibold text-cream [font-variant-numeric:tabular-nums] sm:text-2xl"
+                    className="mt-1 block font-display text-xl font-semibold text-ink [font-variant-numeric:tabular-nums] sm:text-2xl"
                   />
                   <p className="text-xs uppercase tracking-wide text-muted">
                     {s.platform} · {s.label}

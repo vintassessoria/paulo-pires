@@ -151,7 +151,7 @@ export default function Compositions() {
   }, [paused, isPlaying, len])
 
   return (
-    <section id="composicoes" className="relative overflow-hidden border-t border-white/5 py-24 sm:py-32">
+    <section id="composicoes" className="relative overflow-hidden border-t border-ink/5 py-24 sm:py-32">
       <FlowingLines className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden h-full w-1/3 opacity-30 lg:block" />
       <div className="container-pp relative z-10">
         <SectionHeading
@@ -189,7 +189,7 @@ export default function Compositions() {
         <div className="mt-24">
           <Reveal className="mb-10 text-center">
             <span className="eyebrow">Discografia como compositor</span>
-            <h3 className="mt-3 text-balance font-display text-[clamp(1.9rem,4vw,3rem)] uppercase leading-[0.95] tracking-[0.005em] text-cream">
+            <h3 className="mt-3 text-balance font-display text-[clamp(1.9rem,4vw,3rem)] uppercase leading-[0.95] tracking-[0.005em] text-ink">
               A assinatura dele em <span className="text-gold">dezenas de sucessos</span>
             </h3>
           </Reveal>
@@ -198,13 +198,13 @@ export default function Compositions() {
             {compositionCredits.map((group, gi) => (
               <Reveal key={group.artist} delay={(gi % 3) * 0.06}>
                 <div className="card-dark h-full rounded-2xl p-5">
-                  <p className="mb-3 border-b border-white/[0.07] pb-3 font-heading text-base font-semibold text-cream">
+                  <p className="mb-3 border-b border-ink/[0.07] pb-3 font-heading text-base font-semibold text-ink">
                     {group.artist}
                   </p>
                   <ul className="space-y-2">
                     {group.songs.map((s) => (
                       <li key={s.title} className="flex items-baseline justify-between gap-3">
-                        <span className="min-w-0 flex-1 truncate text-sm text-white/80">{s.title}</span>
+                        <span className="min-w-0 flex-1 truncate text-sm text-ink/80">{s.title}</span>
                         <span className="shrink-0 font-display text-sm font-semibold tabular-nums text-gold-light">
                           {s.plays}
                         </span>

@@ -27,10 +27,10 @@ export default function Cutout({ src, alt, label, className = '' }: Props) {
         />
       ) : (
         <div className="relative flex h-full min-h-[260px] w-full items-center justify-center">
-          <span className="font-display text-[24vw] font-semibold leading-none text-white/[0.05] lg:text-[11vw]">
+          <span className="font-display text-[24vw] font-semibold leading-none text-ink/[0.05] lg:text-[11vw]">
             PP
           </span>
-          <span className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap text-[0.6rem] font-semibold uppercase tracking-widest2 text-white/30">
+          <span className="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center gap-2 whitespace-nowrap text-[0.6rem] font-semibold uppercase tracking-widest2 text-ink/30">
             {label}
           </span>
         </div>

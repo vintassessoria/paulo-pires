@@ -75,14 +75,14 @@ export default function VideoShowcase() {
           className="pointer-events-none absolute inset-x-0 top-[12vh] z-10 text-center"
         >
           <p className="eyebrow mb-3">( Produção 2026 )</p>
-          <h2 className="font-display text-[clamp(2rem,6vw,5rem)] uppercase leading-[0.9] tracking-[-0.01em] text-cream">
+          <h2 className="font-display text-[clamp(2rem,6vw,5rem)] uppercase leading-[0.9] tracking-[-0.01em] text-ink">
             Paulo Pires <span className="text-gold">em cena</span>
           </h2>
         </motion.div>
 
         <motion.div
           style={{ scale, borderRadius: radius }}
-          className="relative aspect-video w-[92vw] max-w-[1500px] overflow-hidden border border-white/10 bg-black shadow-[0_60px_140px_-40px_rgba(0,0,0,0.95)]"
+          className="relative aspect-video w-[92vw] max-w-[1500px] overflow-hidden border border-ink/10 bg-black shadow-[0_60px_140px_-40px_rgba(0,0,0,0.95)]"
         >
           <video
             ref={videoRef}
@@ -99,7 +99,7 @@ export default function VideoShowcase() {
             type="button"
             onClick={toggleSound}
             aria-label={muted ? 'Ligar o som' : 'Desligar o som'}
-            className="absolute bottom-4 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-black/55 text-cream backdrop-blur-sm transition-colors hover:bg-black/75"
+            className="absolute bottom-4 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-black/55 text-ink backdrop-blur-sm transition-colors hover:bg-black/75"
           >
             {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
           </button>

@@ -27,7 +27,7 @@ export default function Logo({ className = '', withTagline = true }: Props) {
 
   return (
     <div className={`flex flex-col leading-none ${className}`}>
-      <span className="font-display text-[1.5rem] font-semibold tracking-[-0.01em] text-cream sm:text-[1.7rem]">
+      <span className="font-display text-[1.5rem] font-semibold tracking-[-0.01em] text-ink sm:text-[1.7rem]">
         Paulo <span className="italic font-normal text-gold-grad">Pires</span>
       </span>
       {withTagline && (

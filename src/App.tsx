@@ -1,14 +1,14 @@
 import { MotionConfig } from 'framer-motion'
 import Header from './components/Header'
 import Hero from './components/Hero'
-import VideoShowcase from './components/VideoShowcase'
-import StatementBand from './components/StatementBand'
+import Agenda from './components/Agenda'
 import TopSongs from './components/TopSongs'
+import VideoShowcase from './components/VideoShowcase'
 import Biography from './components/Biography'
+import Compositions from './components/Compositions'
 import ParallaxFeed from './components/ParallaxFeed'
 import Audience from './components/Audience'
 import Media from './components/Media'
-import Compositions from './components/Compositions'
 import Booking from './components/Booking'
 import Footer from './components/Footer'
 import WhatsAppFloat from './components/WhatsAppFloat'
@@ -16,7 +16,6 @@ import SmoothScroll from './components/ui/SmoothScroll'
 import Intro from './components/ui/Intro'
 import ScrollProgress from './components/ui/ScrollProgress'
 import Marquee from './components/ui/Marquee'
-import SectionFX from './components/ui/SectionFX'
 
 const marqueeArtists = [
   'Gusttavo Lima',
@@ -37,56 +36,45 @@ export default function App() {
       <SmoothScroll>
         <Intro />
         <ScrollProgress />
-        <div className="relative min-h-screen">
+        <div className="relative min-h-screen bg-white">
           <Header />
           <main>
             <Hero />
 
-            {/* Faixa de artistas com leve inclinação 3D de "chão" */}
-            <div className="border-y border-gold/10 bg-coal/60 py-7 [perspective:700px]">
-              <div className="[transform:rotateX(7deg)]">
-                <Marquee items={marqueeArtists} />
-              </div>
+            {/* Faixa de artistas que gravam composições dele (prova social) */}
+            <div className="border-y border-ink/10 bg-white py-6">
+              <p className="container-pp mb-4 text-center font-heading text-[11px] font-bold uppercase tracking-widest2 text-muted">
+                Compõe para os maiores do Brasil
+              </p>
+              <Marquee items={marqueeArtists} />
             </div>
+
+            {/* Agenda de Shows — prioridade do sertanejo */}
+            <Agenda />
+
+            {/* As Mais Ouvidas */}
+            <TopSongs />
 
             {/* Vídeo de produção — cresce/revela ao rolar */}
             <VideoShowcase />
 
-            {/* Manifesto */}
-            <StatementBand />
-
-            {/* As Mais Ouvidas */}
-            <div className="relative isolate">
-              <SectionFX variant="washes" />
-              <TopSongs />
-            </div>
-
             {/* Biografia */}
-            <div className="relative isolate">
-              <SectionFX variant="orbs" />
-              <Biography />
-            </div>
-
-            {/* Feed de fotos com parallax (efeito do modelo) */}
-            <ParallaxFeed />
-
-            {/* Público */}
-            <div className="relative isolate">
-              <SectionFX variant="aurora" />
-              <Audience />
-            </div>
-
-            {/* Na Mídia */}
-            <Media />
+            <Biography />
 
             {/* Composições */}
             <Compositions />
 
+            {/* Fotos */}
+            <ParallaxFeed />
+
+            {/* Público */}
+            <Audience />
+
+            {/* Na Mídia */}
+            <Media />
+
             {/* Contato */}
-            <div className="relative isolate">
-              <SectionFX variant="beam" />
-              <Booking />
-            </div>
+            <Booking />
           </main>
           <Footer />
           <WhatsAppFloat />

@@ -4,45 +4,49 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Base — preto profundo (estilo bold), leve calor nas sombras
-        ink: '#0A0908',
-        coal: '#121010',
-        graphite: '#191615',
-        ash: '#221D1B',
-        smoke: '#2C2623',
-        // Acento — ÂMBAR-BRASA / TANGERINA (identidade bold 2026).
-        // Mantém o nome `gold` por compatibilidade com o site inteiro;
-        // o valor agora é brasa. Luz de palco, energia.
+        // TEMA CLARO (padrão sertanejo: Murilo Huff / Gusttavo Lima).
+        paper: '#FFFFFF', // fundo principal
+        bone: '#F5F3F0', // off-white p/ seções alternadas
+        // `ink`/`coal` seguem escuros: usados no TEXTO e nas seções de foto
+        // (hero, rodapé) com overlay escuro e texto claro.
+        ink: '#151311',
+        coal: '#0E0D0C',
+        graphite: '#262320',
+        ash: '#E9E6E1', // cinza claro (bordas/cards no claro)
+        smoke: '#D8D3CC',
+        // Acento VERMELHO (marca do Paulo, alinhado ao vermelho-laranja do
+        // Murilo). Mantém o nome `gold` por compatibilidade com o código.
         gold: {
-          light: '#FF7A48',
-          DEFAULT: '#FF5A1F',
-          deep: '#B23A12',
+          light: '#FF3B2A',
+          DEFAULT: '#E5102E',
+          deep: '#B00C22',
         },
-        amber: '#FF5A1F',
-        ember: '#FF7A48',
-        // Wordmark: no bold o nome é osso quente (não mais dourado)
+        amber: '#F5330C',
+        ember: '#FF3B2A',
+        // Wordmark: agora escuro (nome preto sobre claro)
         wm: {
-          light: '#F6F0E4',
-          DEFAULT: '#F2ECE0',
-          deep: '#CBB89E',
+          light: '#151311',
+          DEFAULT: '#151311',
+          deep: '#151311',
         },
-        clay: '#B23A12',
-        cream: '#F4EEE3',
-        muted: '#98918A',
-        // Brasa de apoio (washes e destaques quentes)
+        clay: '#B00C22',
+        // `cream` = claro, p/ texto sobre seções de FOTO/escuras
+        cream: '#F7F5F2',
+        // `muted` = cinza médio, legível sobre claro
+        muted: '#6C655E',
         warm: {
-          100: '#FCE7D6',
-          300: '#FF9A6B',
-          500: '#FF5A1F',
-          700: '#B23A12',
-          900: '#2A1509',
+          100: '#FBE1DC',
+          300: '#F5330C',
+          500: '#E5102E',
+          700: '#B00C22',
+          900: '#3A0A0E',
         },
       },
       fontFamily: {
-        // Clash Display = títulos maiúsculos, elegantes (estilo Porto)
-        display: ['"Clash Display"', 'system-ui', 'sans-serif'],
-        // Inter para rótulos/UI e corpo — limpo e minimalista
-        heading: ['Inter', 'system-ui', 'sans-serif'],
+        // Archivo Expanded = títulos bold e largos (estilo Acumin Pro Wide,
+        // do site do Murilo Huff). Archivo p/ subtítulos, Inter p/ corpo.
+        display: ['"Archivo Expanded"', 'Archivo', 'system-ui', 'sans-serif'],
+        heading: ['Archivo', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
@@ -56,11 +60,10 @@ export default {
         glow: '0 24px 60px -28px rgba(0,0,0,0.9)',
       },
       backgroundImage: {
-        'gold-grad': 'linear-gradient(180deg, #FF7A48, #FF5A1F)',
-        'wordmark-grad':
-          'linear-gradient(180deg, #F6F0E4 0%, #E7DECB 55%, #CBB89E 100%)',
+        'gold-grad': 'linear-gradient(180deg, #FF3B2A, #E5102E)',
+        'wordmark-grad': 'linear-gradient(180deg, #151311, #151311)',
         'stage-radial':
-          'radial-gradient(60% 50% at 50% 0%, rgba(255,90,31,0.16) 0%, rgba(10,9,8,0) 70%)',
+          'radial-gradient(60% 50% at 50% 0%, rgba(229,16,46,0.10) 0%, rgba(255,255,255,0) 70%)',
       },
       keyframes: {
         floaty: {

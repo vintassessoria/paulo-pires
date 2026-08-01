@@ -59,7 +59,7 @@ export default function CoverStack({ items, active, onNext, onPrev, className = 
               if (isTop) onNext()
             }}
           >
-            <div className="relative h-full w-full overflow-hidden rounded-2xl border border-white/12 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.9)]">
+            <div className="relative h-full w-full overflow-hidden rounded-2xl border border-ink/12 shadow-[0_40px_90px_-30px_rgba(0,0,0,0.9)]">
               <img
                 src={item.cover}
                 alt={`Capa de ${item.title}`}
@@ -69,7 +69,7 @@ export default function CoverStack({ items, active, onNext, onPrev, className = 
               />
               {/* Escurece as cartas de baixo para dar profundidade */}
               {!isTop && <div className="absolute inset-0 bg-ink/40" />}
-              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/10" />
+              <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-ink/10" />
             </div>
           </motion.div>
         )

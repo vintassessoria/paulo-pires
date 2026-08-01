@@ -13,7 +13,7 @@ export default function Marquee({ items, className = '', duration = 32 }: Props)
     <div className="flex shrink-0 items-center">
       {items.map((it, i) => (
         <div key={i} className="flex items-center">
-          <span className="px-8 font-display text-2xl tracking-[0.12em] text-cream/70 sm:text-3xl">
+          <span className="px-8 font-display text-2xl tracking-[0.12em] text-ink/70 sm:text-3xl">
             {it}
           </span>
           <span className="h-1.5 w-1.5 rounded-full bg-gold/70" />
