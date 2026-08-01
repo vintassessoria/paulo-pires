@@ -36,20 +36,19 @@ export default function Intro() {
     <AnimatePresence>
       {show && (
         <motion.div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-white"
           initial={{ opacity: 1 }}
           exit={{ y: '-100%' }}
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
         >
-          <div className="pointer-events-none absolute inset-0 bg-stage-radial opacity-70" />
           <div className="relative text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="font-display text-5xl font-semibold tracking-[-0.01em] text-cream sm:text-7xl">
-                Paulo <span className="italic font-normal text-gold-grad">Pires</span>
+              <p className="font-display text-5xl font-black uppercase tracking-[-0.01em] text-ink sm:text-7xl">
+                Paulo <span className="text-gold-grad">Pires</span>
               </p>
               <motion.div
                 className="mx-auto mt-4 h-[2px] w-56 origin-center rounded-full bg-gold-grad will-change-transform sm:w-80"

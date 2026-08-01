@@ -8,14 +8,13 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="relative overflow-hidden border-t border-white/8 bg-coal">
+    <footer className="relative overflow-hidden border-t border-ink/10 bg-bone">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px hairline-gold" />
       <div className="container-pp relative z-10 pt-16">
         {/* Fechamento editorial */}
-        <div className="flex flex-col items-start justify-between gap-7 border-b border-white/8 pb-12 md:flex-row md:items-end">
-          <h2 className="max-w-xl text-balance font-display text-[clamp(2.05rem,3.8vw,2.8rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-cream">
-            Leve <span className="italic font-normal text-warm-100">Paulo Pires</span> para o seu
-            palco.
+        <div className="flex flex-col items-start justify-between gap-7 border-b border-ink/8 pb-12 md:flex-row md:items-end">
+          <h2 className="max-w-xl text-balance font-display text-[clamp(2.05rem,3.8vw,2.8rem)] font-semibold leading-[1.05] tracking-[-0.01em] text-ink">
+            Leve <span className="text-gold">Paulo Pires</span> para o seu palco.
           </h2>
           <Magnetic strength={0.2}>
             <a href={whatsappLink} target="_blank" rel="noreferrer" className="btn-gold shrink-0">
@@ -41,7 +40,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={name}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.03] text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:text-cream"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/10 bg-ink/[0.03] text-muted transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:text-ink"
                 >
                   <Icon className="h-[1.05rem] w-[1.05rem]" />
                 </a>
@@ -56,7 +55,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <a
                     href={link.href}
-                    className="text-sm text-muted transition-colors hover:text-cream"
+                    className="text-sm text-muted transition-colors hover:text-ink"
                   >
                     {link.label}
                   </a>
@@ -73,7 +72,7 @@ export default function Footer() {
                   href={whatsappLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center gap-3 text-sm text-muted transition-colors hover:text-cream"
+                  className="flex items-center gap-3 text-sm text-muted transition-colors hover:text-ink"
                 >
                   <Phone className="h-4 w-4 text-gold" />
                   {contact.whatsappDisplay}
@@ -82,7 +81,7 @@ export default function Footer() {
               <li>
                 <a
                   href={mailtoLink}
-                  className="flex items-center gap-3 break-all text-sm text-muted transition-colors hover:text-cream"
+                  className="flex items-center gap-3 break-all text-sm text-muted transition-colors hover:text-ink"
                 >
                   <Mail className="h-4 w-4 shrink-0 text-gold" />
                   {contact.email}
@@ -92,7 +91,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/8 py-6 text-center sm:flex-row sm:text-left">
+        <div className="flex flex-col items-center justify-between gap-3 border-t border-ink/8 py-6 text-center sm:flex-row sm:text-left">
           <p className="text-xs text-muted/70">
             © {year} Paulo Pires. Todos os direitos reservados.
           </p>

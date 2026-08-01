@@ -26,7 +26,7 @@ function GalleryItem({
   const y = useTransform(scrollYProgress, [0, 1], [-range, range])
 
   return (
-    <div ref={ref} className={`group relative overflow-hidden rounded-xl border border-white/10 ${className}`}>
+    <div ref={ref} className={`group relative overflow-hidden rounded-xl border border-ink/10 ${className}`}>
       {/* Camada de parallax — bem maior que a moldura (folga de 20% em cima e
           embaixo) pra o deslize nunca abrir vão nas bordas */}
       <motion.div style={{ y }} className="absolute inset-x-0 -top-[20%] h-[140%]">
@@ -48,7 +48,7 @@ function GalleryItem({
         </motion.div>
       </motion.div>
 
-      <span className="pointer-events-none absolute bottom-3 left-3 z-10 translate-y-2 font-heading text-[10px] font-semibold uppercase tracking-widest2 text-cream opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
+      <span className="pointer-events-none absolute bottom-3 left-3 z-10 translate-y-2 font-heading text-[10px] font-semibold uppercase tracking-widest2 text-ink opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
         Paulo Pires
       </span>
     </div>
@@ -61,13 +61,13 @@ function GalleryItem({
  */
 export default function ParallaxFeed() {
   return (
-    <section className="relative overflow-hidden py-24 sm:py-32">
+    <section id="fotos" className="relative overflow-hidden bg-bone py-24 sm:py-32">
       <div className="container-pp">
-        <div className="mb-12 flex flex-wrap items-end justify-between gap-4 border-b border-white/10 pb-6">
-          <h2 className="font-display text-[clamp(2.2rem,6vw,5rem)] uppercase leading-[0.9] tracking-[-0.01em] text-cream">
+        <div className="mb-12 flex flex-wrap items-end justify-between gap-4 border-b border-ink/10 pb-6">
+          <h2 className="font-display text-[clamp(2.2rem,6vw,5rem)] uppercase leading-[0.9] tracking-[-0.01em] text-ink">
             O artista
           </h2>
-          <span className="pb-2 font-heading text-xs font-medium uppercase tracking-widest2 text-white/40">
+          <span className="pb-2 font-heading text-xs font-medium uppercase tracking-widest2 text-ink/40">
             Ensaio 2026 — Goiânia
           </span>
         </div>

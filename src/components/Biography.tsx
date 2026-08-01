@@ -54,7 +54,7 @@ function LivingTimeline() {
   return (
     <ol ref={wrapRef} className="relative [perspective:1200px]">
       {/* Trilho apagado */}
-      <span aria-hidden className="absolute left-[13px] top-0 h-full w-px bg-white/10" />
+      <span aria-hidden className="absolute left-[13px] top-0 h-full w-px bg-ink/10" />
       {/* Linha que se desenha */}
       <motion.span
         aria-hidden
@@ -107,7 +107,7 @@ function LivingTimeline() {
                 initial={{ opacity: 0, x: 18 }}
                 animate={{ opacity: isActive ? 0.07 : 0, x: isActive ? 0 : 18 }}
                 transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-                className="pointer-events-none absolute -top-5 right-0 select-none font-display text-[4.8rem] leading-none text-white/10"
+                className="pointer-events-none absolute -top-5 right-0 select-none font-display text-[4.8rem] leading-none text-ink/10"
               >
                 {item.year}
               </motion.span>
@@ -129,7 +129,7 @@ function LivingTimeline() {
               >
                 {item.year}
               </span>
-              <p className="font-heading text-base font-semibold text-cream">{item.title}</p>
+              <p className="font-heading text-base font-semibold text-ink">{item.title}</p>
               <p className="mt-0.5 text-sm text-muted">{item.text}</p>
             </motion.div>
           </motion.li>
@@ -141,7 +141,7 @@ function LivingTimeline() {
 
 export default function Biography() {
   return (
-    <section id="biografia" className="relative overflow-hidden border-t border-white/5 py-24 sm:py-32">
+    <section id="biografia" className="relative overflow-hidden border-t border-ink/5 py-24 sm:py-32">
       <div className="container-pp">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           {/* Texto + linha do tempo (esquerda) */}
@@ -150,7 +150,7 @@ export default function Biography() {
               <span className="eyebrow !text-gold" style={{ textShadow: 'none' }}>
                 Biografia
               </span>
-              <h2 className="mt-3 text-balance font-display text-[clamp(2.4rem,5vw,4rem)] uppercase leading-[0.92] tracking-[0.005em] text-cream">
+              <h2 className="mt-3 text-balance font-display text-[clamp(2.4rem,5vw,4rem)] uppercase leading-[0.92] tracking-[0.005em] text-ink">
                 A história por trás da <span className="text-gold">voz</span>
               </h2>
             </Reveal>
@@ -164,7 +164,7 @@ export default function Biography() {
             </div>
 
             <Reveal delay={0.1}>
-              <h3 className="mb-6 mt-12 font-heading text-lg font-semibold text-cream">
+              <h3 className="mb-6 mt-12 font-heading text-lg font-semibold text-ink">
                 Marcos da carreira
               </h3>
             </Reveal>
@@ -176,7 +176,7 @@ export default function Biography() {
               mouse, reflexo no chão e legenda flutuando em profundidade */}
           <div className="relative order-1 h-[56vh] lg:order-2 lg:sticky lg:top-24 lg:h-[74vh]">
             <Card3D max={7} className="h-full rounded-[1.5rem]">
-              <div className="reflect-below-lg relative h-full overflow-hidden rounded-[1.5rem] border border-white/10 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]">
+              <div className="reflect-below-lg relative h-full overflow-hidden rounded-[1.5rem] border border-ink/10 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.9)]">
                 <ArtistImage
                   src="/images/paulo-bio.jpg"
                   alt="Paulo Pires — retrato"

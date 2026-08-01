@@ -30,11 +30,11 @@ export default function StatementBand() {
       <div className="container-pp">
         <p className="eyebrow mb-10">( Você já conhece o trabalho dele )</p>
 
-        <h2 className="max-w-5xl font-display text-[clamp(2.2rem,6.5vw,6rem)] uppercase leading-[0.95] tracking-[-0.01em] text-cream">
+        <h2 className="max-w-5xl font-display text-[clamp(2.2rem,6.5vw,6rem)] uppercase leading-[0.95] tracking-[-0.01em] text-ink">
           <span className="sr-only">Você já cantou uma música dele.</span>
           <Line>Você já cantou</Line>
           <Line delay={0.1}>
-            uma música <span className="text-white/30">dele.</span>
+            uma música <span className="text-ink/30">dele.</span>
           </Line>
         </h2>
 
@@ -43,7 +43,7 @@ export default function StatementBand() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="mt-10 max-w-xl text-pretty text-base leading-relaxed text-white/55 sm:text-lg"
+          className="mt-10 max-w-xl text-pretty text-base leading-relaxed text-ink/55 sm:text-lg"
         >
           De Marília a Gusttavo, de Ana Castela a Luan — Paulo Pires assina os
           refrões que o Brasil inteiro canta sem nem saber quem escreveu.

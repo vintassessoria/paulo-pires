@@ -264,10 +264,10 @@ export const eventTypes = [
 /* ---------- Navegação ---------- */
 export const navLinks = [
   { label: 'Início', href: '#inicio' },
+  { label: 'Agenda', href: '#agenda' },
   { label: 'Sucessos', href: '#sucessos' },
   { label: 'Biografia', href: '#biografia' },
-  { label: 'Público', href: '#publico' },
-  { label: 'Na Mídia', href: '#midia' },
   { label: 'Composições', href: '#composicoes' },
+  { label: 'Fotos', href: '#fotos' },
   { label: 'Contato', href: '#contato' },
 ]

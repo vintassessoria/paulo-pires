@@ -91,7 +91,7 @@ export default function Coverflow({ items, active, onActiveChange }: Props) {
             >
               <div
                 className={`relative h-full w-full overflow-hidden rounded-xl border shadow-[0_40px_80px_-30px_rgba(0,0,0,0.9)] ${
-                  isCenter ? 'border-white/20' : 'border-white/[0.06]'
+                  isCenter ? 'border-ink/20' : 'border-ink/[0.06]'
                 }`}
                 style={{
                   WebkitBoxReflect:
@@ -106,7 +106,7 @@ export default function Coverflow({ items, active, onActiveChange }: Props) {
                   className="h-full w-full"
                 />
                 {!isCenter && <div className="absolute inset-0 bg-black/60" />}
-                <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-white/[0.06]" />
+                <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-ink/[0.06]" />
               </div>
 
               {isCenter && (
@@ -117,8 +117,8 @@ export default function Coverflow({ items, active, onActiveChange }: Props) {
                   style={{ transform: 'translateZ(40px)' }}
                   className="glass-deep absolute -bottom-7 left-1/2 w-[94%] -translate-x-1/2 rounded-2xl px-4 py-3 text-center"
                 >
-                  <p className="truncate font-heading text-base font-semibold text-white">{item.title}</p>
-                  <p className="truncate text-sm text-white/65">{item.subtitle}</p>
+                  <p className="truncate font-heading text-base font-semibold text-ink">{item.title}</p>
+                  <p className="truncate text-sm text-ink/65">{item.subtitle}</p>
                 </motion.div>
               )}
             </motion.button>
