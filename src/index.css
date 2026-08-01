@@ -37,7 +37,9 @@
     @apply font-sans antialiased;
     color: #F2ECE0;
     background-color: #0A0908;
-    overflow-x: hidden;
+    /* `clip` (não `hidden`) contém o overflow horizontal SEM criar um
+       container de rolagem — senão quebraria o position: sticky das seções. */
+    overflow-x: clip;
     font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
   }
 

@@ -1,44 +1,66 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Play } from 'lucide-react'
+import { Volume2, VolumeX } from 'lucide-react'
 
 /**
- * Vitrine de vídeo — uma produção do Paulo Pires. A moldura "cresce" e revela
- * conforme a seção entra na tela (animação de scroll). O vídeo só é baixado
- * quando o visitante dá play (preload="none"), então não pesa no carregamento.
- * Toca com som; avisa os outros players do site (pp:audio) para pausarem.
+ * Vitrine de vídeo cinematográfica — a produção do Paulo Pires. A seção é alta
+ * e o vídeo fica GRUDADO (sticky) e centralizado enquanto você rola por ela;
+ * conforme desce, o vídeo CRESCE até quase preencher a tela.
+ *
+ * Começa sozinho: usa o atributo nativo `autoplay` (mudo) — confiável, ao
+ * contrário do play() programático, que a política de autoplay bloqueia. O
+ * vídeo só é BAIXADO quando a seção se aproxima (a `src` é definida por um
+ * IntersectionObserver de disparo único), então não pesa no load da página.
  */
 export default function VideoShowcase() {
   const sectionRef = useRef<HTMLElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
-  const [playing, setPlaying] = useState(false)
+  const [muted, setMuted] = useState(true)
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start'],
+    offset: ['start start', 'end end'],
   })
-  // Cresce de 0,9 → 1 e revela por cortina conforme entra
-  const scale = useTransform(scrollYProgress, [0, 0.4], [0.9, 1])
-  const inset = useTransform(scrollYProgress, [0, 0.35], [12, 0])
-  const clip = useTransform(inset, (v) => `inset(${v}% 0% ${v}% 0% round 1rem)`)
+  const scale = useTransform(scrollYProgress, [0, 0.55], [0.58, 1])
+  const radius = useTransform(scrollYProgress, [0, 0.55], [22, 8])
+  const headOpacity = useTransform(scrollYProgress, [0, 0.28], [1, 0])
 
-  const play = () => {
+  // Garante mudo (necessário pro autoplay) e carrega a src só quando perto
+  useEffect(() => {
     const v = videoRef.current
     if (!v) return
-    v.play()
-      .then(() => {
-        setPlaying(true)
-        window.dispatchEvent(new CustomEvent('pp:audio', { detail: 'video' }))
-      })
-      .catch(() => {})
+    v.muted = true
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting && !v.src) {
+          v.src = '/videos/producao.mp4' // dispara o load; o autoplay cuida do play
+          io.disconnect()
+        }
+      },
+      { rootMargin: '500px 0px 500px 0px' },
+    )
+    io.observe(v)
+    return () => io.disconnect()
+  }, [])
+
+  const toggleSound = () => {
+    const v = videoRef.current
+    if (!v) return
+    const next = !muted
+    v.muted = next
+    setMuted(next)
+    if (!next) {
+      window.dispatchEvent(new CustomEvent('pp:audio', { detail: 'video' }))
+      v.play().catch(() => {})
+    }
   }
 
-  // Se outro player do site tocar, pausa o vídeo (e vice-versa via play())
+  // Se outro player tocar, volta a mutar o vídeo (não sobrepor áudio)
   useEffect(() => {
     const onOther = (e: Event) => {
-      if ((e as CustomEvent).detail !== 'video' && videoRef.current && !videoRef.current.paused) {
-        videoRef.current.pause()
-        setPlaying(false)
+      if ((e as CustomEvent).detail !== 'video' && videoRef.current && !videoRef.current.muted) {
+        videoRef.current.muted = true
+        setMuted(true)
       }
     }
     window.addEventListener('pp:audio', onOther)
@@ -46,50 +68,41 @@ export default function VideoShowcase() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-24 sm:py-32">
-      <div className="container-pp">
-        <div className="mb-10 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="eyebrow mb-4">( Produção 2026 )</p>
-            <h2 className="font-display text-[clamp(2.2rem,6vw,5rem)] uppercase leading-[0.9] tracking-[-0.01em] text-cream">
-              Paulo Pires <span className="text-gold">em cena</span>
-            </h2>
-          </div>
-          <span className="hidden pb-2 font-heading text-xs font-medium uppercase tracking-widest2 text-white/40 sm:block">
-            Assista
-          </span>
-        </div>
+    <section ref={sectionRef} className="relative h-[220vh]">
+      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden">
+        <motion.div
+          style={{ opacity: headOpacity }}
+          className="pointer-events-none absolute inset-x-0 top-[12vh] z-10 text-center"
+        >
+          <p className="eyebrow mb-3">( Produção 2026 )</p>
+          <h2 className="font-display text-[clamp(2rem,6vw,5rem)] uppercase leading-[0.9] tracking-[-0.01em] text-cream">
+            Paulo Pires <span className="text-gold">em cena</span>
+          </h2>
+        </motion.div>
 
         <motion.div
-          style={{ scale, clipPath: clip }}
-          className="relative mx-auto aspect-video w-full overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_50px_120px_-40px_rgba(0,0,0,0.9)]"
+          style={{ scale, borderRadius: radius }}
+          className="relative aspect-video w-[92vw] max-w-[1500px] overflow-hidden border border-white/10 bg-black shadow-[0_60px_140px_-40px_rgba(0,0,0,0.95)]"
         >
           <video
             ref={videoRef}
             poster="/videos/producao-poster.jpg"
-            preload="none"
+            autoPlay
+            muted
+            loop
             playsInline
-            controls={playing}
-            onPause={() => setPlaying(false)}
-            onPlay={() => setPlaying(true)}
+            preload="none"
             className="h-full w-full object-cover"
-          >
-            <source src="/videos/producao.mp4" type="video/mp4" />
-          </video>
+          />
 
-          {/* Overlay de play (some ao tocar) */}
-          {!playing && (
-            <button
-              type="button"
-              onClick={play}
-              aria-label="Assistir ao vídeo"
-              className="group absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/50 via-black/10 to-black/20 transition-colors hover:bg-black/25"
-            >
-              <span className="flex h-20 w-20 items-center justify-center rounded-full bg-gold text-black shadow-[0_16px_40px_-10px_rgba(255,90,31,0.7)] transition-transform duration-300 group-hover:scale-110">
-                <Play className="h-7 w-7 translate-x-[2px] fill-current" />
-              </span>
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={toggleSound}
+            aria-label={muted ? 'Ligar o som' : 'Desligar o som'}
+            className="absolute bottom-4 right-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-black/55 text-cream backdrop-blur-sm transition-colors hover:bg-black/75"
+          >
+            {muted ? <VolumeX className="h-5 w-5" /> : <Volume2 className="h-5 w-5" />}
+          </button>
         </motion.div>
       </div>
     </section>
