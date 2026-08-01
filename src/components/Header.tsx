@@ -22,15 +22,14 @@ export default function Header() {
     const ids = navLinks.map((l) => l.href.slice(1))
     const compute = () => {
       const probe = window.innerHeight * 0.38
+      // Última seção do menu cuja borda superior já passou da linha-guia.
+      // Assim, trechos sem link no menu (ex.: o vídeo) mantêm em destaque a
+      // seção anterior, em vez de voltar para "Início".
       let current = '#inicio'
       for (const id of ids) {
         const el = document.getElementById(id)
         if (!el) continue
-        const r = el.getBoundingClientRect()
-        if (r.top <= probe && r.bottom >= probe) {
-          current = '#' + id
-          break
-        }
+        if (el.getBoundingClientRect().top <= probe) current = '#' + id
       }
       setActive(current)
     }

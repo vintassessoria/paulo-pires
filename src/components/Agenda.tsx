@@ -1,5 +1,4 @@
 import { Calendar, MapPin, ArrowUpRight } from 'lucide-react'
-import SectionHeading from './ui/SectionHeading'
 import Reveal from './ui/Reveal'
 import { shows, whatsappLink } from '../data/site'
 
@@ -13,11 +12,16 @@ export default function Agenda() {
   return (
     <section id="agenda" className="relative bg-bone py-24 sm:py-32">
       <div className="container-pp">
-        <SectionHeading
-          eyebrow="Ao vivo"
-          title="Agenda de Shows"
-          description="Confira as próximas apresentações do Paulo Pires. Para levar o show para a sua cidade ou evento, fale com a equipe."
-        />
+        <Reveal>
+          <p className="eyebrow">Ao vivo</p>
+          <h2 className="mt-3 font-display text-[clamp(2.2rem,5vw,3.6rem)] font-black uppercase leading-[0.95] text-ink">
+            Agenda de Shows
+          </h2>
+          <p className="mt-4 max-w-2xl text-muted">
+            Confira as próximas apresentações do Paulo Pires. Para levar o show para a sua cidade ou
+            evento, fale com a equipe.
+          </p>
+        </Reveal>
 
         <div className="mt-14">
           {hasShows ? (
