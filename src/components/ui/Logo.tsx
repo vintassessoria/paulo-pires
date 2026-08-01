@@ -19,7 +19,7 @@ export default function Logo({ className = '', withTagline = true }: Props) {
       <img
         src="/images/logo.png"
         alt="Paulo Pires"
-        className={`h-6 w-auto invert sm:h-7 ${className}`}
+        className={`h-6 w-auto sm:h-7 ${className}`}
         onError={() => setUseImage(false)}
       />
     )
