@@ -27,10 +27,10 @@ export default function WhatsAppFloat() {
           transition={{ type: 'spring', stiffness: 260, damping: 20 }}
           className="group fixed bottom-5 right-5 z-40 flex items-center gap-3"
         >
-          <span className="hidden rounded-full glass-strong px-4 py-2 font-heading text-sm font-medium text-ink shadow-lg sm:group-hover:block">
+          <span className="hidden rounded-full glass-strong px-4 py-2 font-heading text-sm font-medium text-white shadow-lg sm:group-hover:block">
             Fale com a produção
           </span>
-          <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-ink shadow-[0_10px_30px_-6px_rgba(37,211,102,0.6)] transition-transform duration-300 group-hover:scale-105">
+          <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_10px_30px_-6px_rgba(37,211,102,0.6)] transition-transform duration-300 group-hover:scale-105">
             <span className="absolute inset-0 animate-ping rounded-full bg-[#25D366]/40" />
             <MessageCircle className="relative h-7 w-7 fill-current" />
           </span>

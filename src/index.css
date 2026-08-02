@@ -4,77 +4,51 @@
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: dark;
   }
 
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
-    /* Nunca permitir deslize horizontal da página (corta conteúdo nas bordas) */
     overflow-x: clip;
   }
 
-  /* Lenis (rolagem suave) */
-  html.lenis,
-  html.lenis body {
-    height: auto;
-  }
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-  .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-  .lenis.lenis-stopped {
-    overflow: hidden;
-  }
-
   section[id] {
-    scroll-margin-top: 96px;
+    scroll-margin-top: 80px;
   }
 
   body {
     @apply font-sans antialiased;
-    color: #151311;
-    background-color: #ffffff;
-    /* `clip` (não `hidden`) contém o overflow horizontal SEM criar um
-       container de rolagem — senão quebraria o position: sticky das seções. */
+    color: #F7F5F2;
+    background-color: #0E0D0C;
     overflow-x: clip;
     font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
   }
 
-  /* Archivo Expanded — títulos bold e largos (estilo Acumin Pro Wide) */
+  /* Archivo Expanded — títulos bold e largos */
   .font-display {
     font-weight: 800;
     text-rendering: optimizeLegibility;
   }
 
   ::selection {
-    background-color: rgba(229, 16, 46, 0.22);
-    color: #151311;
-  }
-
-  /* Esconde o cursor nativo quando o personalizado está ativo */
-  body.has-custom-cursor,
-  body.has-custom-cursor a,
-  body.has-custom-cursor button,
-  body.has-custom-cursor [role='listbox'] {
-    cursor: none;
+    background-color: rgba(229, 16, 46, 0.35);
+    color: #ffffff;
   }
 
   ::-webkit-scrollbar {
     width: 9px;
   }
   ::-webkit-scrollbar-track {
-    background: #EEECE8;
+    background: #0E0D0C;
   }
   ::-webkit-scrollbar-thumb {
-    background: #C9C3BB;
+    background: #2A2724;
     border-radius: 999px;
-    border: 2px solid #EEECE8;
+    border: 2px solid #0E0D0C;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #B2ABA1;
+    background: #3C3833;
   }
 }
 
@@ -83,181 +57,77 @@
     @apply mx-auto w-full max-w-content px-5 sm:px-8;
   }
 
-  /* Acento vermelho (números, destaques) */
+  /* Acento vermelho */
   .text-gold-grad {
-    color: #E5102E;
-    -webkit-text-fill-color: #E5102E;
+    color: #FF3B2A;
+    -webkit-text-fill-color: #FF3B2A;
   }
 
-  /* Wordmark do nome — sólido escuro (nome sobre o claro). Em seção de foto,
-     o próprio componente troca por branco. */
-  .wordmark-gold {
-    color: #151311;
-    -webkit-text-fill-color: #151311;
-  }
-
-  /* Painéis claros */
-  .glass {
-    background: rgba(255, 255, 255, 0.7);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(21, 19, 17, 0.08);
-  }
-
-  .glass-strong,
-  .glass-deep {
-    background: rgba(255, 255, 255, 0.9);
+  /* Nav sólida (estado rolado) — escura translúcida */
+  .nav-solid {
+    background: rgba(14, 13, 12, 0.92);
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
-    border: 1px solid rgba(21, 19, 17, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .glass-panel {
-    background: rgba(255, 255, 255, 0.8);
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(21, 19, 17, 0.09);
+  /* Painel escuro translúcido (menu mobile) */
+  .glass-strong {
+    background: rgba(20, 18, 16, 0.96);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  /* Cartão claro — superfície off-white com borda sutil e leve sombra */
+  /* Cartão escuro — superfície sutil sobre o fundo preto */
   .card-dark {
-    background: #ffffff;
-    border: 1px solid rgba(21, 19, 17, 0.1);
-    box-shadow: 0 10px 30px -18px rgba(21, 19, 17, 0.18);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .card-dark:hover {
+    border-color: rgba(255, 59, 42, 0.5);
   }
 
   /* Linha decorativa fina vermelha */
   .hairline-gold {
-    background: linear-gradient(90deg, transparent, rgba(229, 16, 46, 0.5), transparent);
+    background: linear-gradient(90deg, transparent, rgba(229, 16, 46, 0.6), transparent);
   }
 
-  /* Botão vermelho sólido, texto branco + brilho no hover */
+  /* Botão vermelho sólido */
   .btn-gold {
-    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3.5 font-heading text-xs font-bold uppercase tracking-wide transition-colors duration-200;
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-8 py-3.5 font-heading text-xs font-bold uppercase tracking-widest2 transition-colors duration-200;
     background-color: #E5102E;
     color: #ffffff;
   }
   .btn-gold:hover {
-    background-color: #C20D26;
-  }
-  .btn-gold::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 45%;
-    transform: translateX(-140%) skewX(-18deg);
-    background: linear-gradient(90deg, transparent, rgba(255, 246, 230, 0.35), transparent);
-  }
-  .btn-gold:hover::after {
-    animation: btnSheen 0.85s ease forwards;
+    background-color: #FF3B2A;
   }
 
-  @keyframes btnSheen {
-    to {
-      transform: translateX(340%) skewX(-18deg);
-    }
+  /* Botão contorno claro (sobre foto/escuro) */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border px-8 py-3.5 font-heading text-xs font-bold uppercase tracking-widest2 transition-colors duration-200;
+    border-color: rgba(255, 255, 255, 0.45);
+    color: #ffffff;
   }
-
-  /* Botão contorno (escuro sobre o claro) */
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border px-7 py-3 font-heading text-xs font-bold uppercase tracking-wide transition-colors duration-200;
-    border-color: rgba(21, 19, 17, 0.25);
-    color: #151311;
-  }
-  .btn-ghost:hover {
-    border-color: rgba(21, 19, 17, 0.6);
-    background-color: rgba(21, 19, 17, 0.04);
+  .btn-outline:hover {
+    border-color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   .eyebrow {
     @apply font-heading text-xs font-bold uppercase tracking-widest2;
-    color: #E5102E;
+    color: #FF3B2A;
   }
 
-  /* Sombra de texto discreta (sobre foto) */
+  /* Título de seção padrão (centralizado, bold, largo) */
+  .section-title {
+    @apply font-display font-black uppercase leading-[0.95] tracking-[-0.01em] text-white;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+  }
+
   .text-shadow-warm {
     text-shadow: 0 2px 30px rgba(0, 0, 0, 0.7);
   }
-
-  /* Brilho de cursor — bem sutil, branco frio */
-  .spotlight-glow {
-    background: radial-gradient(
-      var(--spot, 240px) circle at var(--mx, 50%) var(--my, 50%),
-      rgba(255, 255, 255, 0.05),
-      transparent 55%
-    );
-  }
-
-  /* Profundidade 3D — só em dispositivos com mouse (onde há inclinação).
-     Em telas de toque a profundidade é neutra: sem translateZ, os
-     elementos nunca "somem" por sair do plano de projeção. */
-  .preserve-3d {
-    transform-style: preserve-3d;
-  }
-  .depth,
-  .depth-sm,
-  .depth-lg {
-    transform: none;
-  }
-  @media (hover: hover) and (pointer: fine) {
-    .depth {
-      transform: translateZ(45px);
-    }
-    .depth-sm {
-      transform: translateZ(24px);
-    }
-    .depth-lg {
-      transform: translateZ(70px);
-    }
-  }
-
-  /* Cursor personalizado */
-  .cursor-dot,
-  .cursor-ring {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9999;
-    border-radius: 9999px;
-    will-change: transform;
-  }
-  .cursor-dot {
-    width: 7px;
-    height: 7px;
-    margin: -3.5px 0 0 -3.5px;
-    background: #ECEAE5;
-  }
-  .cursor-ring {
-    width: 34px;
-    height: 34px;
-    margin: -17px 0 0 -17px;
-    border: 1px solid rgba(168, 159, 146, 0.55);
-    transition: width 0.22s ease, height 0.22s ease, margin 0.22s ease,
-      background-color 0.22s ease, border-color 0.22s ease;
-  }
-  .cursor-ring.cursor-active {
-    width: 58px;
-    height: 58px;
-    margin: -29px 0 0 -29px;
-    background: rgba(168, 159, 146, 0.12);
-    border-color: rgba(168, 159, 146, 0.9);
-  }
-
-  /* Reflexo no "chão" (estilo coverflow) — só em telas grandes,
-     onde há espaço abaixo do elemento */
-  @media (min-width: 1024px) {
-    .reflect-below-lg {
-      -webkit-box-reflect: below 16px linear-gradient(transparent 78%, rgba(0, 0, 0, 0.22));
-    }
-  }
-
-  .noise-overlay {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
-  }
 }
 
-/* Nota: por decisão do artista, as animações do site rodam sempre,
-   mesmo com "reduzir animações" ativado no sistema do visitante. */
+/* Nota: por decisão do artista, as animações do site rodam sempre. */

@@ -1,91 +1,84 @@
-import { Calendar, MapPin, ArrowUpRight } from 'lucide-react'
+import { Mic, MapPin, ArrowUpRight, CalendarDays } from 'lucide-react'
+import Section from './ui/Section'
 import Reveal from './ui/Reveal'
-import { shows, whatsappLink } from '../data/site'
+import { shows, whatsappLink, contact } from '../data/site'
 
 /**
- * Agenda de Shows — prioridade nº 1 de um site de sertanejo (Murilo Huff /
- * Gusttavo Lima). Lista as datas confirmadas; sem datas, mostra o estado
- * "em atualização" com a chamada direta para contratar.
+ * Agenda de Shows — prioridade nº 1 (padrão Murilo Huff / Gusttavo Lima).
+ * Cabeçalho centralizado com ícone + telefone de contratação; abaixo, a
+ * lista de datas ou o estado "em atualização".
  */
 export default function Agenda() {
   const hasShows = shows.length > 0
   return (
-    <section id="agenda" className="relative bg-bone py-24 sm:py-32">
-      <div className="container-pp">
-        <Reveal>
-          <p className="eyebrow">Ao vivo</p>
-          <h2 className="mt-3 font-display text-[clamp(2.2rem,5vw,3.6rem)] font-black uppercase leading-[0.95] text-ink">
-            Agenda de Shows
-          </h2>
-          <p className="mt-4 max-w-2xl text-muted">
-            Confira as próximas apresentações do Paulo Pires. Para levar o show para a sua cidade ou
-            evento, fale com a equipe.
-          </p>
-        </Reveal>
-
-        <div className="mt-14">
-          {hasShows ? (
-            <ul className="mx-auto max-w-3xl divide-y divide-ink/10">
-              {shows.map((s) => (
-                <Reveal key={`${s.date}-${s.city}`}>
-                  <li className="flex flex-wrap items-center justify-between gap-4 py-5">
-                    <div className="flex items-center gap-4">
-                      <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gold/10 text-gold">
-                        <Calendar className="h-5 w-5" />
+    <Section
+      id="agenda"
+      icon={Mic}
+      title="Agenda de Shows"
+      subtitle={
+        <>
+          Contrate um show do Paulo Pires:{' '}
+          <a href={whatsappLink} target="_blank" rel="noreferrer" className="font-bold text-gold-light">
+            {contact.whatsappDisplay}
+          </a>
+        </>
+      }
+      bgImage="/images/feed-3.webp"
+    >
+      <div className="mx-auto mt-12 max-w-2xl">
+        {hasShows ? (
+          <ul className="divide-y divide-white/10 text-left">
+            {shows.map((s) => (
+              <Reveal key={`${s.date}-${s.city}`}>
+                <li className="flex flex-wrap items-center justify-between gap-4 py-5">
+                  <div className="flex items-center gap-4">
+                    <span className="flex h-12 w-12 shrink-0 flex-col items-center justify-center rounded-xl bg-gold/15 text-gold-light">
+                      <span className="font-display text-sm font-black leading-none">
+                        {new Date(s.date + 'T00:00').toLocaleDateString('pt-BR', { day: '2-digit' })}
                       </span>
-                      <div>
-                        <p className="font-heading text-lg font-bold text-ink">
-                          {s.city} <span className="text-muted">· {s.state}</span>
-                        </p>
-                        <p className="flex items-center gap-1.5 text-sm text-muted">
-                          <MapPin className="h-3.5 w-3.5" /> {s.venue}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-6">
-                      <span className="font-display text-xl font-bold text-ink">
-                        {new Date(s.date + 'T00:00').toLocaleDateString('pt-BR', {
-                          day: '2-digit',
-                          month: 'short',
-                        })}
+                      <span className="text-[9px] font-bold uppercase">
+                        {new Date(s.date + 'T00:00').toLocaleDateString('pt-BR', { month: 'short' })}
                       </span>
-                      {s.ticketUrl && (
-                        <a href={s.ticketUrl} target="_blank" rel="noreferrer" className="btn-gold">
-                          Ingressos
-                        </a>
-                      )}
+                    </span>
+                    <div>
+                      <p className="font-heading text-lg font-bold text-white">
+                        {s.city} <span className="text-cream/50">· {s.state}</span>
+                      </p>
+                      <p className="flex items-center gap-1.5 text-sm text-cream/60">
+                        <MapPin className="h-3.5 w-3.5" /> {s.venue}
+                      </p>
                     </div>
-                  </li>
-                </Reveal>
-              ))}
-            </ul>
-          ) : (
-            <Reveal className="mx-auto max-w-2xl">
-              <div className="card-dark flex flex-col items-center rounded-3xl px-8 py-14 text-center">
-                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gold/10 text-gold">
-                  <Calendar className="h-7 w-7" />
-                </span>
-                <h3 className="mt-6 font-display text-2xl font-bold uppercase text-ink">
-                  Agenda em atualização
-                </h3>
-                <p className="mt-3 max-w-md text-pretty text-muted">
-                  Novas datas estão sendo confirmadas. Quer o Paulo Pires no seu evento? Fale com a
-                  equipe e garanta a data.
-                </p>
-                <a
-                  href={whatsappLink}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-gold mt-8"
-                >
-                  Contratar show
-                  <ArrowUpRight className="h-4 w-4" />
-                </a>
-              </div>
-            </Reveal>
-          )}
-        </div>
+                  </div>
+                  {s.ticketUrl && (
+                    <a href={s.ticketUrl} target="_blank" rel="noreferrer" className="btn-gold">
+                      Ingressos
+                    </a>
+                  )}
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+        ) : (
+          <Reveal>
+            <div className="card-dark flex flex-col items-center rounded-3xl px-8 py-12 text-center transition-colors">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-gold/10 text-gold-light">
+                <CalendarDays className="h-6 w-6" />
+              </span>
+              <h3 className="mt-5 font-display text-xl font-bold uppercase text-white">
+                Agenda em atualização
+              </h3>
+              <p className="mt-3 max-w-md text-pretty text-cream/60">
+                Novas datas estão sendo confirmadas. Quer o Paulo Pires no seu evento? Fale com a
+                equipe e garanta a data.
+              </p>
+              <a href={whatsappLink} target="_blank" rel="noreferrer" className="btn-gold mt-7">
+                Contratar show
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          </Reveal>
+        )}
       </div>
-    </section>
+    </Section>
   )
 }
