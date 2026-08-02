@@ -1,6 +1,6 @@
 import { PenLine } from 'lucide-react'
 import Section from './ui/Section'
-import Reveal from './ui/Reveal'
+import CardReveal from './ui/CardReveal'
 import Tilt from './ui/Tilt'
 import { compositionCredits } from '../data/site'
 
@@ -20,7 +20,7 @@ export default function Songwriter() {
     >
       <div className="mt-14 grid grid-cols-1 gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
         {compositionCredits.map((group, gi) => (
-          <Reveal key={group.artist} delay={(gi % 3) * 0.05}>
+          <CardReveal key={group.artist} index={gi} className="h-full">
             <Tilt glare={false} className="h-full">
               <div className="h-full rounded-2xl border border-ink/10 bg-white p-5 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.25)] transition-colors hover:border-gold/40">
               <div className="mb-4 flex items-center justify-between border-b border-ink/10 pb-3">
@@ -41,7 +41,7 @@ export default function Songwriter() {
               </ul>
               </div>
             </Tilt>
-          </Reveal>
+          </CardReveal>
         ))}
       </div>
     </Section>

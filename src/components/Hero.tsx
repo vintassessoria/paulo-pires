@@ -1,5 +1,5 @@
 import { useEffect, useRef, type PointerEvent } from 'react'
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion'
 import { socialItems } from './icons/BrandIcons'
 import { socials, whatsappLink } from '../data/site'
 
@@ -10,6 +10,7 @@ import { socials, whatsappLink } from '../data/site'
  */
 export default function Hero() {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const heroRef = useRef<HTMLElement>(null)
 
   // Garante o `muted` no próprio elemento (requisito de autoplay) e força o
   // play — alguns navegadores ignoram o atributo `muted` renderizado pelo React.
@@ -34,8 +35,13 @@ export default function Hero() {
     py.set((e.clientY - r.top) / r.height)
   }
 
+  // Scroll (funciona no celular): o vídeo dá um leve zoom conforme rola.
+  const { scrollYProgress } = useScroll({ target: heroRef, offset: ['start start', 'end start'] })
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.2])
+
   return (
     <section
+      ref={heroRef}
       id="inicio"
       onPointerMove={onMove}
       style={{ perspective: '1200px' }}
@@ -45,8 +51,9 @@ export default function Hero() {
 
       {/* Vídeo de fundo (mudo, em loop) + foto como poster/fallback + degradês */}
       <div className="absolute inset-0 -z-10">
-        <video
+        <motion.video
           ref={videoRef}
+          style={{ scale: videoScale }}
           className="h-full w-full object-cover object-center"
           poster="/videos/hero-poster.jpg"
           autoPlay
@@ -56,7 +63,7 @@ export default function Hero() {
           preload="auto"
         >
           <source src="/videos/hero.mp4" type="video/mp4" />
-        </video>
+        </motion.video>
         {/* Escuro só embaixo (para o texto) e limpo no meio/topo (aparece o vídeo) */}
         <div className="absolute inset-0 bg-gradient-to-t from-coal via-coal/45 to-transparent" />
         <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-coal/50 to-transparent" />
