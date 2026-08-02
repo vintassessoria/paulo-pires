@@ -64,9 +64,10 @@ export default function Hero() {
         >
           <source src="/videos/hero.mp4" type="video/mp4" />
         </motion.video>
-        {/* Escuro só embaixo (para o texto) e limpo no meio/topo (aparece o vídeo) */}
-        <div className="absolute inset-0 bg-gradient-to-t from-coal via-coal/45 to-transparent" />
-        <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-coal/50 to-transparent" />
+        {/* Escuro só embaixo (para o texto) e limpo no meio/topo (aparece o vídeo).
+            O fundo termina em PRETO para fluir sem corte para a Agenda (também preta). */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-black/50 to-transparent" />
       </div>
 
       <motion.div

@@ -1,5 +1,4 @@
 import { PenLine } from 'lucide-react'
-import { motion } from 'framer-motion'
 import Section from './ui/Section'
 import { compositionCredits } from '../data/site'
 
@@ -14,8 +13,7 @@ function parsePlays(s: string): number {
   return num
 }
 
-// Ordena as músicas de cada artista por streams e os artistas pelo total de
-// streams (dá mais peso a quem tem várias composições grandes do Paulo).
+// Ordena as músicas de cada artista por streams e os artistas pelo total.
 const groups = compositionCredits
   .map((g) => ({
     artist: g.artist,
@@ -24,9 +22,60 @@ const groups = compositionCredits
   }))
   .sort((a, b) => b.total - a.total)
 
+type Group = (typeof groups)[number]
+
+/** Fileira de cards que desliza sozinha para o lado (loop infinito). Pausa no hover. */
+function CardMarquee({ items, duration = 60 }: { items: Group[]; duration?: number }) {
+  const Track = ({ hidden = false }: { hidden?: boolean }) => (
+    <div className="flex shrink-0 items-stretch" aria-hidden={hidden}>
+      {items.map((g, i) => (
+        <div
+          key={i}
+          className="mx-2 flex w-72 shrink-0 flex-col rounded-2xl border border-ink/10 bg-white p-5 text-left shadow-[0_10px_30px_-20px_rgba(0,0,0,0.25)]"
+        >
+          <div className="mb-3 flex items-center justify-between gap-3 border-b border-ink/10 pb-3">
+            <h3 className="truncate font-heading text-base font-bold text-ink">{g.artist}</h3>
+            <span className="shrink-0 rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gold">
+              {g.songs.length} {g.songs.length === 1 ? 'música' : 'músicas'}
+            </span>
+          </div>
+          <ul className="space-y-2">
+            {g.songs.slice(0, 3).map((s) => (
+              <li key={s.title} className="flex items-baseline justify-between gap-3">
+                <span className="min-w-0 flex-1 truncate text-sm text-ink/80">{s.title}</span>
+                <span className="shrink-0 font-heading text-sm font-bold tabular-nums text-gold">
+                  {s.plays}
+                </span>
+              </li>
+            ))}
+          </ul>
+          {g.songs.length > 3 && (
+            <p className="mt-auto pt-3 text-xs font-medium text-ink/45">
+              + {g.songs.length - 3} {g.songs.length - 3 === 1 ? 'outra música' : 'outras músicas'}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+
+  return (
+    <div className="group flex overflow-hidden py-1">
+      <div
+        className="flex w-max items-stretch animate-marquee group-hover:[animation-play-state:paused]"
+        style={{ animationDuration: `${duration}s` }}
+      >
+        <Track />
+        <Track hidden />
+      </div>
+    </div>
+  )
+}
+
 /**
- * Composições — cards por artista num mosaico (masonry) que encaixa sem deixar
- * buracos quando um card é curto. Cada card entra suave no scroll.
+ * Composições — o diferencial do Paulo. Cards por artista num carrossel que
+ * desliza sozinho para o lado (igual as fotos). Cada card mostra as 3 mais
+ * tocadas + "+N outras".
  */
 export default function Songwriter() {
   return (
@@ -38,34 +87,9 @@ export default function Songwriter() {
       bg="light"
       watermark="Paulo Pires"
     >
-      <div className="mx-auto mt-12 max-w-5xl columns-1 gap-4 text-left sm:columns-2 lg:columns-3">
-        {groups.map((g, gi) => (
-          <motion.div
-            key={g.artist}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: (gi % 3) * 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="mb-4 break-inside-avoid rounded-2xl border border-ink/10 bg-white p-5 shadow-[0_10px_30px_-20px_rgba(0,0,0,0.25)] transition-colors hover:border-gold/40"
-          >
-            <div className="mb-3 flex items-center justify-between gap-3 border-b border-ink/10 pb-3">
-              <h3 className="font-heading text-base font-bold text-ink">{g.artist}</h3>
-              <span className="shrink-0 rounded-full bg-gold/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-gold">
-                {g.songs.length} {g.songs.length === 1 ? 'música' : 'músicas'}
-              </span>
-            </div>
-            <ul className="space-y-2">
-              {g.songs.map((s) => (
-                <li key={s.title} className="flex items-baseline justify-between gap-3">
-                  <span className="min-w-0 flex-1 truncate text-sm text-ink/80">{s.title}</span>
-                  <span className="shrink-0 font-heading text-sm font-bold tabular-nums text-gold">
-                    {s.plays}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        ))}
+      {/* Carrossel full-bleed (de ponta a ponta) */}
+      <div className="relative left-1/2 mt-12 w-screen -translate-x-1/2 overflow-hidden">
+        <CardMarquee items={groups} duration={60} />
       </div>
     </Section>
   )

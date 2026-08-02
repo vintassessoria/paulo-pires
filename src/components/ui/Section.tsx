@@ -78,6 +78,8 @@ export default function Section({
 }: Props) {
   const s = STYLE[bg]
   const dark = bg === 'black' || bg === 'dark'
+  // Cor para fundir as bordas com as seções vizinhas (evita o "corte" seco).
+  const fadeFrom = bg === 'black' ? 'from-black' : 'from-[#141414]'
 
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
@@ -119,6 +121,14 @@ export default function Section({
             {watermark}
           </span>
         </motion.div>
+      )}
+
+      {/* Bordas fundidas com a cor da seção — dá continuidade entre as faixas escuras */}
+      {dark && (
+        <>
+          <div className={`pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b ${fadeFrom} to-transparent`} />
+          <div className={`pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t ${fadeFrom} to-transparent`} />
+        </>
       )}
 
       <div className="container-pp text-center">
