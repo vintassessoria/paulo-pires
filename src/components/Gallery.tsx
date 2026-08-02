@@ -1,34 +1,38 @@
-import { Camera } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-/** Fotos do Paulo em P&B. */
+/**
+ * Fotos do Paulo em P&B. `pos` define o corte de cada uma: os retratos
+ * verticais usam `object-top` (o rosto fica no alto), as paisagens usam
+ * `object-center`. Assim nenhuma corta o rosto.
+ */
 const photos = [
-  '/images/feed-1.webp',
-  '/images/feed-2.webp',
-  '/images/feed-3.webp',
-  '/images/hero-main.webp',
-  '/images/feed-4.webp',
-  '/images/feed-5.webp',
-  '/images/feed-6.webp',
-  '/images/paulo-bio.jpg',
+  { src: '/images/feed-1.webp', pos: 'object-top' },
+  { src: '/images/feed-2.webp', pos: 'object-center' },
+  { src: '/images/feed-3.webp', pos: 'object-top' },
+  { src: '/images/hero-main.webp', pos: 'object-top' },
+  { src: '/images/feed-4.webp', pos: 'object-top' },
+  { src: '/images/feed-5.webp', pos: 'object-center' },
+  { src: '/images/feed-6.webp', pos: 'object-top' },
+  { src: '/images/paulo-bio.jpg', pos: 'object-top' },
 ]
 
-type RowProps = { items: string[]; reverse?: boolean; duration?: number }
+type Photo = (typeof photos)[number]
+type RowProps = { items: Photo[]; reverse?: boolean; duration?: number }
 
 /** Uma fileira que desliza sozinha para o lado (loop infinito). Pausa no hover. */
-function MarqueeRow({ items, reverse = false, duration = 42 }: RowProps) {
+function MarqueeRow({ items, reverse = false, duration = 46 }: RowProps) {
   const Group = ({ hidden = false }: { hidden?: boolean }) => (
     <div className="flex shrink-0" aria-hidden={hidden}>
-      {items.map((src, i) => (
+      {items.map((p, i) => (
         <div
           key={i}
           className="group/ph relative mx-1.5 aspect-[3/2] h-36 shrink-0 overflow-hidden rounded-xl sm:h-48"
         >
           <img
-            src={src}
+            src={p.src}
             alt="Paulo Pires"
             loading="lazy"
-            className="h-full w-full object-cover grayscale transition-all duration-500 ease-out will-change-transform group-hover/ph:scale-110 group-hover/ph:grayscale-0"
+            className={`h-full w-full object-cover ${p.pos} grayscale transition-all duration-500 ease-out will-change-transform group-hover/ph:scale-110 group-hover/ph:grayscale-0`}
           />
         </div>
       ))}
@@ -53,37 +57,13 @@ function MarqueeRow({ items, reverse = false, duration = 42 }: RowProps) {
 /** Galeria — carrossel infinito de fotos em P&B, duas fileiras em direções opostas. */
 export default function Gallery() {
   return (
-    <section id="fotos" className="relative isolate overflow-hidden bg-black py-20 sm:py-24">
-      {/* Cabeçalho centralizado */}
-      <div className="container-pp text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, rotateX: -45 }}
-          whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
-          viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          style={{ transformPerspective: 600 }}
-          className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border border-gold/40 bg-gold/10 text-gold-light"
-        >
-          <Camera className="h-6 w-6" />
-        </motion.div>
-        <motion.h2
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="section-title text-gold-light"
-        >
-          Fotos
-        </motion.h2>
-      </div>
-
-      {/* Carrossel — duas fileiras deslizando em direções opostas */}
+    <section id="fotos" className="relative isolate overflow-hidden bg-black py-14 sm:py-16">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="mt-12 space-y-3"
+        className="space-y-3"
       >
         <MarqueeRow items={photos} duration={46} />
         <MarqueeRow items={[...photos].reverse()} reverse duration={54} />
