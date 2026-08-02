@@ -268,6 +268,5 @@ export const navLinks = [
   { label: 'Sucessos', href: '#sucessos' },
   { label: 'Biografia', href: '#biografia' },
   { label: 'Composições', href: '#composicoes' },
-  { label: 'Fotos', href: '#fotos' },
   { label: 'Contato', href: '#contato' },
 ]

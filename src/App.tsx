@@ -5,7 +5,6 @@ import Music from './components/Music'
 import About from './components/About'
 import Songwriter from './components/Songwriter'
 import Video from './components/Video'
-import Gallery from './components/Gallery'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import WhatsAppFloat from './components/WhatsAppFloat'
@@ -21,7 +20,6 @@ export default function App() {
         <About />
         <Songwriter />
         <Video />
-        <Gallery />
         <Contact />
       </main>
       <Footer />
