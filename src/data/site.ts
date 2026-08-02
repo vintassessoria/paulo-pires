@@ -267,6 +267,7 @@ export const navLinks = [
   { label: 'Agenda', href: '#agenda' },
   { label: 'Biografia', href: '#biografia' },
   { label: 'Composições', href: '#composicoes' },
+  { label: 'Fotos', href: '#fotos' },
   { label: 'Músicas', href: '#sucessos' },
   { label: 'Contato', href: '#contato' },
 ]

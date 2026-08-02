@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import Agenda from './components/Agenda'
 import About from './components/About'
 import Songwriter from './components/Songwriter'
+import Gallery from './components/Gallery'
 import Music from './components/Music'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -17,6 +18,7 @@ export default function App() {
         <Agenda />
         <About />
         <Songwriter />
+        <Gallery />
         <Music />
         <Contact />
       </main>
