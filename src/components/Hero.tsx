@@ -32,14 +32,14 @@ export default function Hero() {
         <video
           ref={videoRef}
           className="h-full w-full object-cover object-center"
-          poster="/images/hero-main.webp"
+          poster="/videos/hero-poster.jpg"
           autoPlay
           muted
           loop
           playsInline
           preload="auto"
         >
-          <source src="/videos/producao.mp4" type="video/mp4" />
+          <source src="/videos/hero.mp4" type="video/mp4" />
         </video>
         {/* Escuro só embaixo (para o texto) e limpo no meio/topo (aparece o vídeo) */}
         <div className="absolute inset-0 bg-gradient-to-t from-coal via-coal/45 to-transparent" />
@@ -60,7 +60,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="mt-4 font-display text-[clamp(2.8rem,9vw,8rem)] font-black uppercase leading-[0.86] tracking-[-0.01em] text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)]"
+          className="mt-4 font-display text-[clamp(2.8rem,9vw,8rem)] font-black leading-[0.86] tracking-[-0.02em] text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)]"
         >
           Paulo Pires
         </motion.h2>

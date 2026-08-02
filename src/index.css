@@ -25,9 +25,9 @@
     font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
   }
 
-  /* Archivo Expanded — títulos bold e largos */
+  /* Archivo Expanded 900 — substituto do "Acumin Pro Wide" das referências */
   .font-display {
-    font-weight: 800;
+    font-weight: 900;
     text-rendering: optimizeLegibility;
   }
 
@@ -119,10 +119,12 @@
     color: #FF3B2A;
   }
 
-  /* Título de seção padrão (centralizado, bold, largo) */
+  /* Título de seção — como nas referências: Acumin Pro Wide 900, em Caixa
+     Alta e Baixa (NÃO tudo maiúsculo), com espacejamento negativo. A cor é
+     definida por seção. */
   .section-title {
-    @apply font-display font-black uppercase leading-[0.95] tracking-[-0.01em] text-white;
-    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    @apply font-display font-black leading-[0.95] tracking-[-0.02em];
+    font-size: clamp(2.3rem, 5.5vw, 3.7rem);
   }
 
   .text-shadow-warm {

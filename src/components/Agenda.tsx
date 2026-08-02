@@ -23,7 +23,9 @@ export default function Agenda() {
           </a>
         </>
       }
+      bg="black"
       bgImage="/images/feed-3.webp"
+      watermark="Paulo Pires"
     >
       <div className="mx-auto mt-12 max-w-2xl">
         {hasShows ? (

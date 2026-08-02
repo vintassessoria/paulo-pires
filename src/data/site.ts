@@ -265,8 +265,8 @@ export const eventTypes = [
 export const navLinks = [
   { label: 'Início', href: '#inicio' },
   { label: 'Agenda', href: '#agenda' },
-  { label: 'Sucessos', href: '#sucessos' },
   { label: 'Biografia', href: '#biografia' },
   { label: 'Composições', href: '#composicoes' },
+  { label: 'Músicas', href: '#sucessos' },
   { label: 'Contato', href: '#contato' },
 ]
