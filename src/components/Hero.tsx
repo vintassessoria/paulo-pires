@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronDown } from 'lucide-react'
 import { socialItems } from './icons/BrandIcons'
 import { socials, whatsappLink } from '../data/site'
 
@@ -24,7 +23,7 @@ export default function Hero() {
   return (
     <section
       id="inicio"
-      className="relative isolate flex min-h-[100svh] items-center justify-center overflow-hidden text-center"
+      className="relative isolate flex min-h-[100svh] items-end justify-center overflow-hidden text-center"
     >
       <h1 className="sr-only">Paulo Pires — Cantor e Compositor</h1>
 
@@ -42,11 +41,12 @@ export default function Hero() {
         >
           <source src="/videos/producao.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-coal/70 via-coal/50 to-coal" />
-        <div className="absolute inset-0 bg-coal/30" />
+        {/* Escuro só embaixo (para o texto) e limpo no meio/topo (aparece o vídeo) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-coal via-coal/45 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-coal/50 to-transparent" />
       </div>
 
-      <div className="container-pp flex flex-col items-center pb-16 pt-24">
+      <div className="container-pp flex flex-col items-center pb-14 sm:pb-24">
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,7 +60,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1 }}
-          className="mt-4 font-display text-[clamp(3.2rem,12vw,10rem)] font-black uppercase leading-[0.86] tracking-[-0.01em] text-white drop-shadow-[0_6px_40px_rgba(0,0,0,0.6)]"
+          className="mt-4 font-display text-[clamp(2.8rem,9vw,8rem)] font-black uppercase leading-[0.86] tracking-[-0.01em] text-white drop-shadow-[0_4px_30px_rgba(0,0,0,0.85)]"
         >
           Paulo Pires
         </motion.h2>
@@ -109,21 +109,6 @@ export default function Hero() {
           ))}
         </motion.div>
       </div>
-
-      {/* Seta de rolagem */}
-      <a
-        href="#agenda"
-        aria-label="Rolar para a agenda"
-        className="absolute bottom-7 left-1/2 -translate-x-1/2 text-white/70 transition-colors hover:text-white"
-      >
-        <motion.span
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-white/30"
-        >
-          <ChevronDown className="h-5 w-5" />
-        </motion.span>
-      </a>
     </section>
   )
 }
