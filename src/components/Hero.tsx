@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 import { socialItems } from './icons/BrandIcons'
@@ -9,6 +10,17 @@ import { socials, whatsappLink } from '../data/site'
  * nome grande, chamada e os botões (agenda em primeiro lugar).
  */
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  // Garante o `muted` no próprio elemento (requisito de autoplay) e força o
+  // play — alguns navegadores ignoram o atributo `muted` renderizado pelo React.
+  useEffect(() => {
+    const v = videoRef.current
+    if (!v) return
+    v.muted = true
+    v.play().catch(() => {})
+  }, [])
+
   return (
     <section
       id="inicio"
@@ -16,13 +28,20 @@ export default function Hero() {
     >
       <h1 className="sr-only">Paulo Pires — Cantor e Compositor</h1>
 
-      {/* Foto de fundo + degradês */}
+      {/* Vídeo de fundo (mudo, em loop) + foto como poster/fallback + degradês */}
       <div className="absolute inset-0 -z-10">
-        <img
-          src="/images/hero-main.webp"
-          alt="Paulo Pires"
-          className="h-full w-full object-cover object-[60%_20%]"
-        />
+        <video
+          ref={videoRef}
+          className="h-full w-full object-cover object-center"
+          poster="/images/hero-main.webp"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          <source src="/videos/producao.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-gradient-to-b from-coal/70 via-coal/50 to-coal" />
         <div className="absolute inset-0 bg-coal/30" />
       </div>
