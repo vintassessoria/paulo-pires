@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { Music as MusicIcon, Play, Pause } from 'lucide-react'
 import Section from './ui/Section'
 import Reveal from './ui/Reveal'
+import Tilt from './ui/Tilt'
 import { topSongs, socials, spotifyArtistId } from '../data/site'
 import { SpotifyIcon, YoutubeIcon } from './icons/BrandIcons'
 
@@ -51,6 +52,7 @@ export default function Music() {
           const isPlaying = playing === i
           return (
             <Reveal key={song.title} delay={(i % 3) * 0.06}>
+              <Tilt className="h-full">
               <div className="card-dark group flex items-center gap-4 rounded-2xl p-3 transition-colors">
                 <button
                   type="button"
@@ -93,6 +95,7 @@ export default function Music() {
                   </p>
                 </div>
               </div>
+              </Tilt>
             </Reveal>
           )
         })}

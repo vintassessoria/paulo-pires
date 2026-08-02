@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, type PointerEvent } from 'react'
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { socialItems } from './icons/BrandIcons'
 import { socials, whatsappLink } from '../data/site'
 
@@ -20,9 +20,25 @@ export default function Hero() {
     v.play().catch(() => {})
   }, [])
 
+  // Parallax 3D sutil: o conteúdo flutua conforme a posição do mouse.
+  const px = useMotionValue(0.5)
+  const py = useMotionValue(0.5)
+  const rotateX = useSpring(useTransform(py, [0, 1], [5, -5]), { stiffness: 120, damping: 18 })
+  const rotateY = useSpring(useTransform(px, [0, 1], [-5, 5]), { stiffness: 120, damping: 18 })
+  const tx = useSpring(useTransform(px, [0, 1], [-14, 14]), { stiffness: 120, damping: 18 })
+  const ty = useSpring(useTransform(py, [0, 1], [-10, 10]), { stiffness: 120, damping: 18 })
+
+  const onMove = (e: PointerEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect()
+    px.set((e.clientX - r.left) / r.width)
+    py.set((e.clientY - r.top) / r.height)
+  }
+
   return (
     <section
       id="inicio"
+      onPointerMove={onMove}
+      style={{ perspective: '1200px' }}
       className="relative isolate flex min-h-[100svh] items-end justify-center overflow-hidden text-center"
     >
       <h1 className="sr-only">Paulo Pires — Cantor e Compositor</h1>
@@ -46,7 +62,10 @@ export default function Hero() {
         <div className="absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-coal/50 to-transparent" />
       </div>
 
-      <div className="container-pp flex flex-col items-center pb-14 sm:pb-24">
+      <motion.div
+        style={{ rotateX, rotateY, x: tx, y: ty }}
+        className="container-pp flex flex-col items-center pb-14 [transform-style:preserve-3d] sm:pb-24"
+      >
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
@@ -108,7 +127,7 @@ export default function Hero() {
             </a>
           ))}
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }

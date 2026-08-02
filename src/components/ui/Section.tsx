@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react'
+import { useRef, type ReactNode } from 'react'
 import type { LucideIcon } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 type Bg = 'black' | 'dark' | 'red' | 'light'
 
@@ -79,8 +79,17 @@ export default function Section({
   const s = STYLE[bg]
   const dark = bg === 'black' || bg === 'dark'
 
+  const sectionRef = useRef<HTMLElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  })
+  // Parallax: a marca d'água desliza contra o scroll (sensação de profundidade).
+  const wmY = useTransform(scrollYProgress, [0, 1], ['-14%', '14%'])
+
   return (
     <section
+      ref={sectionRef}
       id={id}
       className={`relative isolate overflow-hidden py-24 sm:py-28 ${BG_CLASS[bg]} ${className}`}
     >
@@ -98,24 +107,28 @@ export default function Section({
         </div>
       )}
 
-      {/* Marca d'água com o nome do artista */}
+      {/* Marca d'água com o nome do artista (parallax) */}
       {watermark && (
-        <div className="pointer-events-none absolute inset-0 -z-[1] flex items-center justify-center overflow-hidden">
+        <motion.div
+          style={{ y: wmY }}
+          className="pointer-events-none absolute inset-0 -z-[1] flex items-center justify-center overflow-hidden"
+        >
           <span
             className={`whitespace-nowrap font-display text-[26vw] font-black uppercase leading-none tracking-tighter ${s.wm}`}
           >
             {watermark}
           </span>
-        </div>
+        </motion.div>
       )}
 
       <div className="container-pp text-center">
         {/* Ícone */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0, scale: 0.8, rotateX: -45 }}
+          whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
           viewport={{ once: true, amount: 0.6 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          style={{ transformPerspective: 600 }}
           className={`mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full border ${s.iconWrap}`}
         >
           <Icon className="h-6 w-6" />
