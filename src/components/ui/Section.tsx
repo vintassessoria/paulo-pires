@@ -2,6 +2,7 @@ import { useRef, type ReactNode } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import AnimatedGradient from './AnimatedGradient'
+import ParticleField from './ParticleField'
 
 type Bg = 'black' | 'dark' | 'red' | 'light'
 
@@ -92,8 +93,9 @@ export default function Section({
       id={id}
       className={`relative isolate overflow-hidden py-24 sm:py-28 ${BG_CLASS[bg]} ${className}`}
     >
-      {/* Fundo de gradiente animado (manchas de luz que derivam devagar) */}
+      {/* Fundo animado: brilho em gradiente + fagulhas de luz em canvas */}
       <AnimatedGradient variant={gradVariant} />
+      <ParticleField variant={gradVariant} />
 
       {/* Marca d'água com o nome do artista (parallax) */}
       {watermark && (
