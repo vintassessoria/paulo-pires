@@ -85,9 +85,7 @@ export default function Songwriter() {
       title="Composições"
       subtitle="Mais de 80% dos grandes nomes do sertanejo já gravaram uma composição do Paulo Pires — de Marília Mendonça a Ana Castela."
       bg="light"
-      animated
-      watermark="Paulo Pires"
-    >
+      animated    >
       {/* Carrossel full-bleed (de ponta a ponta) */}
       <div className="relative left-1/2 mt-12 w-screen -translate-x-1/2 overflow-hidden">
         <CardMarquee items={groups} duration={60} />

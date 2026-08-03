@@ -13,9 +13,7 @@ export default function About() {
       icon={User}
       title="Biografia"
       subtitle="Quem é o goiano por trás dos maiores sucessos do sertanejo."
-      bg="red"
-      watermark="Paulo Pires"
-    >
+      bg="red"    >
       <div className="mx-auto mt-10 max-w-3xl space-y-5">
         {bio.map((p, i) => (
           <Reveal key={i} delay={0.05 * i}>

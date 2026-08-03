@@ -1,6 +1,6 @@
-import { useRef, type ReactNode } from 'react'
+import type { ReactNode } from 'react'
 import type { LucideIcon } from 'lucide-react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import AnimatedGradient from './AnimatedGradient'
 
 type Bg = 'black' | 'dark' | 'red' | 'light'
@@ -14,8 +14,6 @@ type Props = {
   bg?: Bg
   /** Liga o gradiente animado nesta seção (usamos em seções alternadas). */
   animated?: boolean
-  /** Nome gigante e apagado atrás do conteúdo (marca d'água, como no Murilo Huff). */
-  watermark?: string
   children?: ReactNode
   className?: string
 }
@@ -71,7 +69,6 @@ export default function Section({
   subtitle,
   bg = 'dark',
   animated = false,
-  watermark,
   children,
   className = '',
 }: Props) {
@@ -83,36 +80,13 @@ export default function Section({
   // Sombra sutil no título para destacar sobre o gradiente que se move.
   const titleShadow = bg === 'light' ? '' : '[text-shadow:0_2px_20px_rgba(0,0,0,0.6)]'
 
-  const sectionRef = useRef<HTMLElement>(null)
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  })
-  // Parallax: a marca d'água desliza contra o scroll (sensação de profundidade).
-  const wmY = useTransform(scrollYProgress, [0, 1], ['-14%', '14%'])
-
   return (
     <section
-      ref={sectionRef}
       id={id}
       className={`relative isolate overflow-hidden py-24 sm:py-28 ${BG_CLASS[bg]} ${className}`}
     >
       {/* Gradiente animado — só nas seções "sim" (alternadas) */}
       {animated && <AnimatedGradient variant={gradVariant} />}
-
-      {/* Marca d'água com o nome do artista (parallax) */}
-      {watermark && (
-        <motion.div
-          style={{ y: wmY }}
-          className="pointer-events-none absolute inset-0 -z-[1] flex items-center justify-center overflow-hidden"
-        >
-          <span
-            className={`whitespace-nowrap font-display text-[26vw] font-black uppercase leading-none tracking-tighter ${s.wm}`}
-          >
-            {watermark}
-          </span>
-        </motion.div>
-      )}
 
       {/* Bordas fundidas com a cor da seção — dá continuidade entre as faixas escuras */}
       {dark && (

@@ -44,9 +44,7 @@ export default function Music() {
       icon={MusicIcon}
       title="Músicas"
       subtitle="Os maiores sucessos do Paulo Pires como artista — mais de 950 milhões de streams. Ouça nas plataformas."
-      bg="dark"
-      watermark="Paulo Pires"
-    >
+      bg="dark"    >
       <div className="mt-14 grid grid-cols-1 gap-4 text-left sm:grid-cols-2 lg:grid-cols-3">
         {topSongs.map((song, i) => {
           const isPlaying = playing === i
