@@ -1,61 +1,175 @@
+import { useEffect, useRef } from 'react'
+import { Renderer, Program, Mesh, Color, Triangle } from 'ogl'
+
 type Variant = 'dark' | 'red' | 'light'
 
-type Blob = { cls: string; color: string; op: number; anim: string; dur: number }
-
-/**
- * Fundo animado tipo FUMAÇA/NÉVOA (estilo quintaldohungria.com): manchas
- * grandes bem borradas (blur) que derivam e se deformam devagar, formando
- * nuvens que se movem. Cores do Paulo (vermelho/vinho escuro). O blur fica
- * numa camada só (mais barato); as manchas se movem só com transform.
- */
-const BLOBS: Record<Variant, Blob[]> = {
-  dark: [
-    { cls: '-left-[10%] -top-[15%] h-[70vw] w-[70vw]', color: '#8f0c20', op: 0.5, anim: 'animate-drift1', dur: 17 },
-    { cls: '-right-[12%] -top-[8%] h-[62vw] w-[62vw]', color: '#5c0f1e', op: 0.55, anim: 'animate-drift2', dur: 21 },
-    { cls: 'left-[12%] -bottom-[18%] h-[72vw] w-[72vw]', color: '#b00c22', op: 0.42, anim: 'animate-drift3', dur: 19 },
-    { cls: 'right-[6%] -bottom-[12%] h-[56vw] w-[56vw]', color: '#3a0a12', op: 0.6, anim: 'animate-wave', dur: 25 },
-  ],
-  red: [
-    { cls: '-left-[10%] -top-[15%] h-[70vw] w-[70vw]', color: '#FF6B4A', op: 0.4, anim: 'animate-drift1', dur: 17 },
-    { cls: '-right-[12%] -top-[8%] h-[62vw] w-[62vw]', color: '#7c0a1c', op: 0.62, anim: 'animate-drift2', dur: 21 },
-    { cls: 'left-[12%] -bottom-[18%] h-[72vw] w-[72vw]', color: '#c20d26', op: 0.42, anim: 'animate-drift3', dur: 19 },
-    { cls: 'right-[6%] -bottom-[12%] h-[56vw] w-[56vw]', color: '#2a0508', op: 0.6, anim: 'animate-wave', dur: 25 },
-  ],
-  light: [
-    { cls: '-left-[10%] -top-[15%] h-[60vw] w-[60vw]', color: '#FF6B4A', op: 0.18, anim: 'animate-drift1', dur: 19 },
-    { cls: '-right-[12%] -top-[8%] h-[55vw] w-[55vw]', color: '#E5102E', op: 0.08, anim: 'animate-drift2', dur: 23 },
-    { cls: 'left-[12%] -bottom-[18%] h-[62vw] w-[62vw]', color: '#F5330C', op: 0.1, anim: 'animate-drift3', dur: 21 },
-  ],
+/** Cores do "aurora" (ramp da esquerda p/ direita) por tipo de fundo. */
+const STOPS: Record<Variant, [string, string, string]> = {
+  // Simétrico e na mesma família de vermelho (cores da marca) para combinar.
+  dark: ['#B00C22', '#FF3B2A', '#B00C22'],
+  red: ['#9c0a1c', '#FF7A5C', '#9c0a1c'],
+  light: ['#FBDAD3', '#FF7F66', '#FBDAD3'],
 }
 
-// Grão de filme (ruído procedural via SVG feTurbulence).
-const GRAIN =
-  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
+const VERT = `#version 300 es
+in vec2 position;
+void main() { gl_Position = vec4(position, 0.0, 1.0); }`
 
+const FRAG = `#version 300 es
+precision highp float;
+uniform float uTime;
+uniform float uAmplitude;
+uniform vec3 uColorStops[3];
+uniform vec2 uResolution;
+uniform float uBlend;
+out vec4 fragColor;
+
+vec3 permute(vec3 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }
+
+float snoise(vec2 v){
+  const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+  vec2 i  = floor(v + dot(v, C.yy));
+  vec2 x0 = v - i + dot(i, C.xx);
+  vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);
+  vec4 x12 = x0.xyxy + C.xxzz;
+  x12.xy -= i1;
+  i = mod(i, 289.0);
+  vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));
+  vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.0);
+  m = m * m; m = m * m;
+  vec3 x = 2.0 * fract(p * C.www) - 1.0;
+  vec3 h = abs(x) - 0.5;
+  vec3 ox = floor(x + 0.5);
+  vec3 a0 = x - ox;
+  m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+  vec3 g;
+  g.x  = a0.x  * x0.x  + h.x  * x0.y;
+  g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+  return 130.0 * dot(m, g);
+}
+
+struct ColorStop { vec3 color; float position; };
+
+#define COLOR_RAMP(colors, factor, finalColor) {              \
+  int index = 0;                                              \
+  for (int i = 0; i < 2; i++) {                               \
+     ColorStop currentColor = colors[i];                      \
+     bool isInBetween = currentColor.position <= factor;      \
+     index = int(mix(float(index), float(i), float(isInBetween))); \
+  }                                                           \
+  ColorStop currentColor = colors[index];                     \
+  ColorStop nextColor = colors[index + 1];                    \
+  float range = nextColor.position - currentColor.position;   \
+  float lerpFactor = (factor - currentColor.position) / range; \
+  finalColor = mix(currentColor.color, nextColor.color, lerpFactor); \
+}
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / uResolution;
+  uv.y = 1.0 - uv.y; // brilho no rodapé (topo livre para o título)
+
+  ColorStop colors[3];
+  colors[0] = ColorStop(uColorStops[0], 0.0);
+  colors[1] = ColorStop(uColorStops[1], 0.5);
+  colors[2] = ColorStop(uColorStops[2], 1.0);
+
+  vec3 rampColor;
+  COLOR_RAMP(colors, uv.x, rampColor);
+
+  float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
+  height = exp(height);
+  height = (uv.y * 2.0 - height + 0.2);
+  float intensity = 0.6 * height;
+
+  float midPoint = 0.20;
+  float alpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
+
+  fragColor = vec4(rampColor * alpha, alpha);
+}`
+
+/**
+ * Fundo animado "Aurora" (shader WebGL via OGL — o mesmo efeito do componente
+ * "Floating Animation"/Aurora do Framer). Imperativo, sem hooks de biblioteca
+ * (não dá o erro de "Invalid hook call"). Pausa quando sai da tela.
+ */
 export default function AnimatedGradient({ variant = 'dark' }: { variant?: Variant }) {
-  const grainOpacity = variant === 'light' ? 0.07 : 0.13
-  return (
-    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      {/* Camada de fumaça: manchas coloridas borradas que derivam */}
-      <div className="absolute inset-0 blur-[55px]">
-        {BLOBS[variant].map((b, i) => (
-          <div
-            key={i}
-            className={`absolute rounded-full ${b.cls} ${b.anim}`}
-            style={{
-              backgroundColor: b.color,
-              opacity: b.op,
-              animationDuration: `${b.dur}s`,
-              willChange: 'transform',
-            }}
-          />
-        ))}
-      </div>
-      {/* Grão de filme */}
-      <div
-        className="absolute inset-0 mix-blend-overlay"
-        style={{ backgroundImage: GRAIN, backgroundSize: '170px 170px', opacity: grainOpacity }}
-      />
-    </div>
-  )
+  const ref = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const ctn = ref.current
+    if (!ctn) return
+
+    const renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true })
+    const gl = renderer.gl
+    gl.clearColor(0, 0, 0, 0)
+    gl.enable(gl.BLEND)
+    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA)
+    gl.canvas.style.backgroundColor = 'transparent'
+    gl.canvas.style.width = '100%'
+    gl.canvas.style.height = '100%'
+
+    const geometry = new Triangle(gl)
+    if (geometry.attributes.uv) delete (geometry.attributes as Record<string, unknown>).uv
+
+    const stops = STOPS[variant].map((hex) => {
+      const c = new Color(hex)
+      return [c.r, c.g, c.b]
+    })
+
+    const program = new Program(gl, {
+      vertex: VERT,
+      fragment: FRAG,
+      uniforms: {
+        uTime: { value: 0 },
+        uAmplitude: { value: 1.0 },
+        uColorStops: { value: stops },
+        uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
+        uBlend: { value: 0.5 },
+      },
+    })
+    const mesh = new Mesh(gl, { geometry, program })
+    ctn.appendChild(gl.canvas)
+
+    const resize = () => {
+      const w = ctn.offsetWidth
+      const h = ctn.offsetHeight
+      renderer.setSize(w, h)
+      program.uniforms.uResolution.value = [w, h]
+    }
+    const ro = new ResizeObserver(resize)
+    ro.observe(ctn)
+    resize()
+
+    let raf = 0
+    let running = false
+    const update = (t: number) => {
+      raf = requestAnimationFrame(update)
+      program.uniforms.uTime.value = t * 0.001 * 0.4
+      renderer.render({ scene: mesh })
+    }
+    const start = () => {
+      if (running) return
+      running = true
+      raf = requestAnimationFrame(update)
+    }
+    const stop = () => {
+      running = false
+      cancelAnimationFrame(raf)
+    }
+    // Só anima quando a seção está visível.
+    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? start() : stop()), {
+      rootMargin: '120px',
+    })
+    io.observe(ctn)
+
+    return () => {
+      stop()
+      ro.disconnect()
+      io.disconnect()
+      if (gl.canvas.parentElement === ctn) ctn.removeChild(gl.canvas)
+      gl.getExtension('WEBGL_lose_context')?.loseContext()
+    }
+  }, [variant])
+
+  return <div ref={ref} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" />
 }
