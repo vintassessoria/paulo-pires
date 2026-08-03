@@ -80,6 +80,8 @@ export default function Section({
   // Cor para fundir as bordas com as seções vizinhas (evita o "corte" seco).
   const fadeFrom = bg === 'black' ? 'from-black' : 'from-[#141414]'
   const gradVariant = bg === 'light' ? 'light' : bg === 'red' ? 'red' : 'dark'
+  // Sombra sutil no título para destacar sobre o gradiente que se move.
+  const titleShadow = bg === 'light' ? '' : '[text-shadow:0_2px_20px_rgba(0,0,0,0.6)]'
 
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
@@ -139,7 +141,7 @@ export default function Section({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className={`section-title ${s.title}`}
+          className={`section-title ${s.title} ${titleShadow}`}
         >
           {title}
         </motion.h2>

@@ -1,46 +1,46 @@
 type Variant = 'dark' | 'red' | 'light'
 
+type Layer = { bg: string; anim: string; dur: number }
+
 /**
- * Fundo CINEMATOGRÁFICO (estilo Framer "CinematicBackground"): um gradiente
- * rico multi-stop + uma segunda mancha de luz, os dois derivando bem devagar,
- * com uma textura de GRÃO DE FILME por cima (mix-blend overlay). O grão é o
- * que dá o ar "cinema". Só transform (barato na GPU).
+ * Fundo de GRADIENTE ANIMADO: manchas de luz (radial-gradient) posicionadas
+ * nos cantos/bordas que derivam de forma bem visível, deixando o CENTRO mais
+ * escuro (o texto continua destacando). Textura de grão de filme por cima.
+ * Só transform (barato na GPU). Animações drift1/2/3 do tailwind.config.
  */
-const GRAD: Record<Variant, [string, string]> = {
+const LAYERS: Record<Variant, Layer[]> = {
   dark: [
-    'radial-gradient(ellipse 140% 100% at 50% 8%, #FF6B4A 0%, #E5102E 27%, #7c0a1c 52%, #1a0508 74%, transparent 92%)',
-    'radial-gradient(ellipse 90% 75% at 82% 102%, rgba(245,51,12,0.5) 0%, transparent 60%)',
+    { bg: 'radial-gradient(45% 45% at 12% 16%, rgba(229,16,46,0.55), transparent 60%)', anim: 'animate-drift1', dur: 13 },
+    { bg: 'radial-gradient(42% 42% at 90% 22%, rgba(255,59,42,0.45), transparent 60%)', anim: 'animate-drift2', dur: 16 },
+    { bg: 'radial-gradient(52% 52% at 50% 108%, rgba(176,12,34,0.5), transparent 62%)', anim: 'animate-drift3', dur: 19 },
   ],
   red: [
-    'radial-gradient(ellipse 150% 110% at 50% 10%, #FF9166 0%, #FF3B2A 24%, #E5102E 48%, #8f0a1e 76%, transparent 98%)',
-    'radial-gradient(ellipse 85% 75% at 82% 102%, rgba(40,6,10,0.55) 0%, transparent 62%)',
+    { bg: 'radial-gradient(55% 52% at 16% 16%, rgba(255,120,92,0.55), transparent 62%)', anim: 'animate-drift1', dur: 13 },
+    { bg: 'radial-gradient(52% 50% at 88% 40%, rgba(125,6,22,0.7), transparent 62%)', anim: 'animate-drift2', dur: 16 },
+    { bg: 'radial-gradient(55% 52% at 50% 108%, rgba(22,4,6,0.55), transparent 62%)', anim: 'animate-drift3', dur: 19 },
   ],
   light: [
-    'radial-gradient(ellipse 150% 120% at 50% 6%, rgba(255,107,74,0.32) 0%, rgba(229,16,46,0.10) 40%, transparent 74%)',
-    'radial-gradient(ellipse 80% 70% at 85% 102%, rgba(245,51,12,0.06) 0%, transparent 60%)',
+    { bg: 'radial-gradient(45% 45% at 14% 18%, rgba(255,107,74,0.3), transparent 60%)', anim: 'animate-drift1', dur: 15 },
+    { bg: 'radial-gradient(42% 42% at 88% 30%, rgba(229,16,46,0.09), transparent 60%)', anim: 'animate-drift2', dur: 18 },
+    { bg: 'radial-gradient(48% 48% at 50% 108%, rgba(245,51,12,0.06), transparent 62%)', anim: 'animate-drift3', dur: 21 },
   ],
 }
 
-// Grão de filme (ruído procedural via SVG feTurbulence) como textura repetida.
+// Grão de filme (ruído procedural via SVG feTurbulence).
 const GRAIN =
   "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")"
 
 export default function AnimatedGradient({ variant = 'dark' }: { variant?: Variant }) {
-  const [g1, g2] = GRAD[variant]
-  const grainOpacity = variant === 'light' ? 0.09 : 0.16
+  const grainOpacity = variant === 'light' ? 0.08 : 0.14
   return (
     <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      {/* Gradiente rico, derivando bem devagar */}
-      <div
-        className="absolute inset-[-25%] animate-drift2"
-        style={{ background: g1, animationDuration: '26s', willChange: 'transform' }}
-      />
-      {/* Segunda mancha, em outra direção, para dar profundidade */}
-      <div
-        className="absolute inset-[-25%] animate-drift1"
-        style={{ background: g2, animationDuration: '21s', willChange: 'transform' }}
-      />
-      {/* Grão de filme */}
+      {LAYERS[variant].map((l, i) => (
+        <div
+          key={i}
+          className={`absolute inset-[-15%] ${l.anim}`}
+          style={{ background: l.bg, animationDuration: `${l.dur}s`, willChange: 'transform' }}
+        />
+      ))}
       <div
         className="absolute inset-0 mix-blend-overlay"
         style={{ backgroundImage: GRAIN, backgroundSize: '170px 170px', opacity: grainOpacity }}
