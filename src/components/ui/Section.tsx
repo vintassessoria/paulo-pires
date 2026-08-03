@@ -1,6 +1,7 @@
 import { useRef, type ReactNode } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
+import AnimatedGradient from './AnimatedGradient'
 
 type Bg = 'black' | 'dark' | 'red' | 'light'
 
@@ -11,9 +12,6 @@ type Props = {
   subtitle?: ReactNode
   /** Cor de fundo da faixa (padrão das referências: preto / escuro / vermelho / claro). */
   bg?: Bg
-  /** Foto de fundo (só nas faixas escuras; fica bem escurecida). */
-  bgImage?: string
-  bgPosition?: string
   /** Nome gigante e apagado atrás do conteúdo (marca d'água, como no Murilo Huff). */
   watermark?: string
   children?: ReactNode
@@ -70,8 +68,6 @@ export default function Section({
   title,
   subtitle,
   bg = 'dark',
-  bgImage,
-  bgPosition = 'center',
   watermark,
   children,
   className = '',
@@ -80,6 +76,7 @@ export default function Section({
   const dark = bg === 'black' || bg === 'dark'
   // Cor para fundir as bordas com as seções vizinhas (evita o "corte" seco).
   const fadeFrom = bg === 'black' ? 'from-black' : 'from-[#141414]'
+  const gradVariant = bg === 'light' ? 'light' : bg === 'red' ? 'red' : 'dark'
 
   const sectionRef = useRef<HTMLElement>(null)
   const { scrollYProgress } = useScroll({
@@ -95,19 +92,8 @@ export default function Section({
       id={id}
       className={`relative isolate overflow-hidden py-24 sm:py-28 ${BG_CLASS[bg]} ${className}`}
     >
-      {/* Foto de fundo escurecida (só nas faixas escuras) */}
-      {bgImage && dark && (
-        <div className="absolute inset-0 -z-10">
-          <img
-            src={bgImage}
-            alt=""
-            aria-hidden
-            className="h-full w-full object-cover opacity-40"
-            style={{ objectPosition: bgPosition }}
-          />
-          <div className="absolute inset-0 bg-black/70" />
-        </div>
-      )}
+      {/* Fundo de gradiente animado (manchas de luz que derivam devagar) */}
+      <AnimatedGradient variant={gradVariant} />
 
       {/* Marca d'água com o nome do artista (parallax) */}
       {watermark && (
