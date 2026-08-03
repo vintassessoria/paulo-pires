@@ -2,7 +2,6 @@ import { useRef, type ReactNode } from 'react'
 import type { LucideIcon } from 'lucide-react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import AnimatedGradient from './AnimatedGradient'
-import ParticleField from './ParticleField'
 
 type Bg = 'black' | 'dark' | 'red' | 'light'
 
@@ -13,6 +12,8 @@ type Props = {
   subtitle?: ReactNode
   /** Cor de fundo da faixa (padrão das referências: preto / escuro / vermelho / claro). */
   bg?: Bg
+  /** Liga o gradiente animado nesta seção (usamos em seções alternadas). */
+  animated?: boolean
   /** Nome gigante e apagado atrás do conteúdo (marca d'água, como no Murilo Huff). */
   watermark?: string
   children?: ReactNode
@@ -69,6 +70,7 @@ export default function Section({
   title,
   subtitle,
   bg = 'dark',
+  animated = false,
   watermark,
   children,
   className = '',
@@ -93,9 +95,8 @@ export default function Section({
       id={id}
       className={`relative isolate overflow-hidden py-24 sm:py-28 ${BG_CLASS[bg]} ${className}`}
     >
-      {/* Fundo animado: brilho em gradiente + fagulhas de luz em canvas */}
-      <AnimatedGradient variant={gradVariant} />
-      <ParticleField variant={gradVariant} />
+      {/* Gradiente animado — só nas seções "sim" (alternadas) */}
+      {animated && <AnimatedGradient variant={gradVariant} />}
 
       {/* Marca d'água com o nome do artista (parallax) */}
       {watermark && (

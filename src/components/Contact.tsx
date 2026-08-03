@@ -12,6 +12,7 @@ export default function Contact() {
       title="Contato para Shows"
       subtitle="Show, evento corporativo, festa ou rodeio: fale com a equipe e garanta a data com o artista que assina os maiores sucessos do sertanejo."
       bg="red"
+      animated
       watermark="Paulo Pires"
     >
       {/* Contatos diretos */}

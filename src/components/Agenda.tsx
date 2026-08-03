@@ -24,6 +24,7 @@ export default function Agenda() {
         </>
       }
       bg="black"
+      animated
       watermark="Paulo Pires"
     >
       <div className="mx-auto mt-12 max-w-2xl">
