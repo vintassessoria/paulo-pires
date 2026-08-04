@@ -25,6 +25,7 @@ export default function About() {
         title="Biografia"
         subtitle="Quem é o goiano por trás dos maiores sucessos da música."
         bg="black"
+        className="!bg-transparent"
       >
         <div className="mx-auto mt-10 max-w-3xl space-y-6">
           {bio.map((p, i) => (
