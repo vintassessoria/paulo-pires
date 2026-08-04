@@ -1,0 +1,9 @@
+# Arquivos de origem brutos (não são usados pelo site) — mantidos só como material
+*.mp4
+0x1900-000000-80-0-0.jpg
+1 2 (1).jpg
+1 2 (2).jpg
+FLS*.jpg
+LOGO_FECHADO-01.png
+node_modules
+.env*
