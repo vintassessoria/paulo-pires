@@ -12,9 +12,9 @@ export default function About() {
       {/* Foto de fundo da biografia */}
       <div className="absolute inset-0 -z-10">
         <img
-          src="/images/bio-bg.jpg"
+          src="/images/paulo-bio.jpg"
           alt="Paulo Pires biografia"
-          className="h-full w-full object-cover object-top opacity-35"
+          className="h-full w-full object-cover object-center opacity-[0.15]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/85 to-black/95" />
       </div>
