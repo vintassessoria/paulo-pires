@@ -62,6 +62,7 @@ export default function Hero() {
           playsInline
           preload="auto"
         >
+          <source src="/videos/hero.webm" type="video/webm" />
           <source src="/videos/hero.mp4" type="video/mp4" />
         </motion.video>
         {/* Escuro só embaixo (para o texto) e limpo no meio/topo (aparece o vídeo).
