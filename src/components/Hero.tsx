@@ -47,7 +47,7 @@ export default function Hero() {
       style={{ perspective: '1200px' }}
       className="relative isolate flex min-h-[100svh] items-end justify-center overflow-hidden text-center"
     >
-      <h1 className="sr-only">Paulo Pires — Cantor e Compositor</h1>
+      <h1 className="sr-only">Paulo Pires — Site Oficial</h1>
 
       {/* Vídeo de fundo (mudo, em loop) + foto como poster/fallback + degradês */}
       <div className="absolute inset-0 -z-10">
@@ -80,7 +80,7 @@ export default function Hero() {
           transition={{ duration: 0.6 }}
           className="font-heading text-xs font-bold uppercase tracking-widest2 text-gold-light sm:text-sm"
         >
-          Cantor &amp; Compositor — Goiás
+          Goiás — Site Oficial
         </motion.p>
 
         <motion.h2

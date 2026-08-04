@@ -88,27 +88,32 @@ export const topSongs: {
   badge?: string
   cover: string
   preview?: string
+  spotifyUrl: string
 }[] = [
   { title: 'Ameaça', credit: 'part. MC Danny e Marcynho Sensação', streams: '+650 milhões', badge: '4x Diamante',
-    // Capa oficial do single (enviada pelo artista), no lugar da que o
-    // iTunes retornava. "Ameaça" é do Paulo, feat. MC Danny e Marcynho.
     cover: '/images/ameaca-cover.webp',
-    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/5f/80/55/5f80555d-567c-fc47-e934-e54124b19b66/mzaf_6945942457561514816.plus.aac.p.m4a' },
+    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview123/v4/5f/80/55/5f80555d-567c-fc47-e934-e54124b19b66/mzaf_6945942457561514816.plus.aac.p.m4a',
+    spotifyUrl: 'https://open.spotify.com/search/Amea%C3%A7a%20Paulo%20Pires' },
   { title: 'Pane no Sistema', credit: 'Grego & Paulo Pires', streams: '+196 milhões',
     cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/bd/e0/81/bde0810c-265b-7681-5f20-d15e9060e842/cover.jpg/600x600bb.jpg',
-    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/7e/85/c2/7e85c2de-d0ea-df04-4afe-2fd7ac8a94ad/mzaf_14661804878196672242.plus.aac.p.m4a' },
+    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/7e/85/c2/7e85c2de-d0ea-df04-4afe-2fd7ac8a94ad/mzaf_14661804878196672242.plus.aac.p.m4a',
+    spotifyUrl: 'https://open.spotify.com/search/Pane%20no%20Sistema%20Paulo%20Pires' },
   { title: 'Maloqueiro', credit: 'Natanzinho Lima & Paulo Pires · ao vivo', streams: '+51 milhões',
     cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/47/99/1d/47991d6e-5322-c4cd-bbe5-9bdbc25233a4/8721416112157.jpg/600x600bb.jpg',
-    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8f/8c/47/8f8c47e1-a511-a5a1-6447-e10d58e8c7d3/mzaf_3165059774540793450.plus.aac.p.m4a' },
+    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/8f/8c/47/8f8c47e1-a511-a5a1-6447-e10d58e8c7d3/mzaf_3165059774540793450.plus.aac.p.m4a',
+    spotifyUrl: 'https://open.spotify.com/search/Maloqueiro%20Paulo%20Pires' },
   { title: 'Princesinha', credit: 'Paulo Pires, Max e Luan', streams: '+19,3 milhões',
     cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/0a/eb/0c/0aeb0c3b-ccd1-ef98-9382-4c889350e6ec/195729275959_cover.jpg/600x600bb.jpg',
-    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/2d/33/0e/2d330ec7-c5ad-db0e-3719-f1efa86263e0/mzaf_17010888961089822517.plus.aac.p.m4a' },
+    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview126/v4/2d/33/0e/2d330ec7-c5ad-db0e-3719-f1efa86263e0/mzaf_17010888961089822517.plus.aac.p.m4a',
+    spotifyUrl: 'https://open.spotify.com/search/Princesinha%20Paulo%20Pires' },
   { title: 'De Pisadinha em Pisadinha', credit: 'Paulo Pires', streams: '+17,5 milhões',
     cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/f8/d8/18/f8d818a3-49b4-146c-7c33-9ec9614ea13f/7892920098907_cover.jpg/600x600bb.jpg',
-    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview124/v4/80/09/a0/8009a00c-deb4-995d-b149-cb14f037817f/mzaf_5765540997049797610.plus.aac.p.m4a' },
+    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview124/v4/80/09/a0/8009a00c-deb4-995d-b149-cb14f037817f/mzaf_5765540997049797610.plus.aac.p.m4a',
+    spotifyUrl: 'https://open.spotify.com/search/De%20Pisadinha%20em%20Pisadinha%20Paulo%20Pires' },
   { title: 'Apaixonado Nela', credit: 'Paulo Pires, Diego & Ray e outros', streams: '+16,8 milhões',
     cover: 'https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/14/55/16/14551606-4bcd-17d0-50de-ebe02ca74333/198937814989_cover.jpg/600x600bb.jpg',
-    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1c/50/03/1c5003de-ca34-5ad9-a21f-b760349d2d22/mzaf_16985966000371024043.plus.aac.p.m4a' },
+    preview: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1c/50/03/1c5003de-ca34-5ad9-a21f-b760349d2d22/mzaf_16985966000371024043.plus.aac.p.m4a',
+    spotifyUrl: 'https://open.spotify.com/search/Apaixonado%20Nela%20Paulo%20Pires' },
 ]
 
 /* ---------- Composições em destaque (1 hit por artista, tocáveis) ----------

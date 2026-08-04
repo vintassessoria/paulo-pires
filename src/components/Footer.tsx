@@ -49,7 +49,7 @@ export default function Footer() {
         </div>
 
         <p className="mt-2 text-xs text-cream/40">
-          © {year} Paulo Pires · Cantor &amp; Compositor · Todos os direitos reservados.
+          © {year} Paulo Pires · Todos os direitos reservados.
         </p>
       </div>
     </footer>

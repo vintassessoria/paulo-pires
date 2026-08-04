@@ -5,9 +5,9 @@ type Variant = 'dark' | 'red' | 'light'
 
 /** Cores do "aurora" (ramp da esquerda p/ direita) por tipo de fundo. */
 const STOPS: Record<Variant, [string, string, string]> = {
-  // Simétrico e na mesma família de vermelho (cores da marca) para combinar.
-  dark: ['#B00C22', '#FF3B2A', '#B00C22'],
-  red: ['#9c0a1c', '#FF7A5C', '#9c0a1c'],
+  // Cores mais suaves e sofisticadas (tom vinho/rubi escuro), perfeitas no escuro
+  dark: ['#6B0514', '#D32F2F', '#6B0514'],
+  red: ['#7A0A1C', '#E53935', '#7A0A1C'],
   light: ['#FBDAD3', '#FF7F66', '#FBDAD3'],
 }
 
@@ -171,5 +171,5 @@ export default function AnimatedGradient({ variant = 'dark' }: { variant?: Varia
     }
   }, [variant])
 
-  return <div ref={ref} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" />
+  return <div ref={ref} className="pointer-events-none absolute inset-0 -z-10 overflow-hidden opacity-40 sm:opacity-70" />
 }

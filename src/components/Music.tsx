@@ -51,48 +51,63 @@ export default function Music() {
           return (
             <CardReveal key={song.title} index={i} className="h-full">
               <Tilt className="h-full">
-              <div className="card-dark group flex items-center gap-4 rounded-2xl p-3 transition-colors">
-                <button
-                  type="button"
-                  onClick={() => toggle(i)}
-                  aria-label={isPlaying ? `Pausar ${song.title}` : `Tocar ${song.title}`}
-                  className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-xl"
+                <a
+                  href={song.spotifyUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  title={`Ouvir "${song.title}" no Spotify`}
+                  className="card-dark group flex items-center gap-3.5 rounded-2xl p-3.5 transition-all duration-300 hover:border-gold/50 hover:bg-white/[0.08]"
                 >
-                  <img
-                    src={song.cover}
-                    alt={`Capa de ${song.title}`}
-                    loading="lazy"
-                    className="h-full w-full object-cover"
-                  />
-                  <span
-                    className={`absolute inset-0 flex items-center justify-center bg-black/45 transition-opacity ${
-                      isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                    }`}
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      toggle(i)
+                    }}
+                    aria-label={isPlaying ? `Pausar prévia de ${song.title}` : `Tocar prévia de ${song.title}`}
+                    className="relative h-[72px] w-[72px] shrink-0 overflow-hidden rounded-xl"
                   >
-                    <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold text-white">
-                      {isPlaying ? (
-                        <Pause className="h-4 w-4 fill-current" />
-                      ) : (
-                        <Play className="h-4 w-4 translate-x-[1px] fill-current" />
-                      )}
-                    </span>
-                  </span>
-                </button>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <h3 className="truncate font-heading text-base font-bold text-white">{song.title}</h3>
-                    {song.badge && (
-                      <span className="shrink-0 rounded-full bg-gold px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
-                        {song.badge}
+                    <img
+                      src={song.cover}
+                      alt={`Capa de ${song.title}`}
+                      loading="lazy"
+                      className="h-full w-full object-cover"
+                    />
+                    <span
+                      className={`absolute inset-0 flex items-center justify-center bg-black/45 transition-opacity ${
+                        isPlaying ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
+                      }`}
+                    >
+                      <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold text-white shadow-md">
+                        {isPlaying ? (
+                          <Pause className="h-4 w-4 fill-current" />
+                        ) : (
+                          <Play className="h-4 w-4 translate-x-[1px] fill-current" />
+                        )}
                       </span>
-                    )}
+                    </span>
+                  </button>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center gap-2">
+                      <h3 className="truncate font-heading text-base font-bold text-white transition-colors group-hover:text-gold-light">
+                        {song.title}
+                      </h3>
+                      {song.badge && (
+                        <span className="shrink-0 rounded-full bg-gold px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">
+                          {song.badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className="truncate text-xs text-cream/55">{song.credit}</p>
+                    <p className="mt-1 font-heading text-sm font-bold text-gold-light">
+                      {song.streams} <span className="font-medium text-cream/50">streams</span>
+                    </p>
                   </div>
-                  <p className="truncate text-xs text-cream/55">{song.credit}</p>
-                  <p className="mt-1 font-heading text-sm font-bold text-gold-light">
-                    {song.streams} <span className="font-medium text-cream/50">streams</span>
-                  </p>
-                </div>
-              </div>
+                  <div className="shrink-0 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-cream/60 transition-all duration-300 group-hover:border-gold/60 group-hover:bg-gold/15 group-hover:text-gold-light">
+                    <SpotifyIcon className="h-4 w-4 fill-current" />
+                  </div>
+                </a>
               </Tilt>
             </CardReveal>
           )
