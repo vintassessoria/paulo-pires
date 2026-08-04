@@ -11,7 +11,17 @@ import WhatsAppFloat from './components/WhatsAppFloat'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-coal">
+    <div className="relative min-h-screen bg-coal">
+      {/* Foto do Paulo sutil, fixa, atrás de todas as seções */}
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <img
+          src="/images/paulo-single.jpg"
+          alt=""
+          aria-hidden
+          className="h-full w-full object-cover object-top opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/70" />
+      </div>
       <Header />
       <main>
         <Hero />

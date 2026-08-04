@@ -19,10 +19,10 @@ type Props = {
 }
 
 const BG_CLASS: Record<Bg, string> = {
-  black: 'bg-black',
-  dark: 'bg-[#141414]',
-  red: 'bg-gold',
-  light: 'bg-[#F4F1EC]',
+  black: 'bg-black/60',
+  dark: 'bg-[#141414]/60',
+  red: 'bg-gold/85',
+  light: 'bg-[#F4F1EC]/85',
 }
 
 /** Estilos por tipo de fundo: cor do título, do subtítulo, do ícone e da marca d'água. */

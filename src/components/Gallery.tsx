@@ -6,7 +6,7 @@ import { Sparkles, Trophy, Music2 } from 'lucide-react'
  */
 export default function Gallery() {
   return (
-    <section id="fotos" className="relative isolate overflow-hidden bg-black py-20 sm:py-28">
+    <section id="fotos" className="relative isolate overflow-hidden bg-black/60 py-20 sm:py-28">
       <div className="container-pp">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
