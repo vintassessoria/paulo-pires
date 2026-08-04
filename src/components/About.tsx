@@ -14,7 +14,7 @@ export default function About() {
         <img
           src="/images/paulo-single.jpg"
           alt="Paulo Pires biografia"
-          className="h-full w-full object-cover object-[50%_20%] opacity-60"
+          className="h-full w-full object-cover object-[50%_20%] opacity-90"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/95" />
       </div>
